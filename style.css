@@ -1,0 +1,1818 @@
+@font-face {
+    font-family:italiana;
+    src: url(./fonts/Italiana-Regular.ttf);
+}
+@font-face {
+    font-family:renade;
+    src: url(./fonts/Ranade-Medium.otf);
+}
+@font-face {
+    font-family:excon;
+    src: url(./fonts/Excon-Medium.otf);
+}
+@font-face {
+    font-family:xanh;
+    src: url(./fonts/XanhMono-Regular.ttf);
+}
+@font-face {
+    font-family:mld;
+    src: url(./fonts/MonsieurLaDoulaise-Regular.ttf);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+#main {
+    width: 100%;
+    position: relative;
+    background-color: #f9f4ee;
+    
+    height: 2000vh;
+    overflow: hidden;
+
+}
+
+
+
+.loadingpage {
+    width: 100%;
+    height: 100vh;
+
+    background-color: #5D5B4F;
+
+    position: absolute;
+    top: 0%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 1vw;
+
+    z-index: 10;
+}
+
+.hero {
+    width: 100%;
+    height: 100vh;
+ z-index: 2;
+    background-color:#f9f4ee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.hero-sec{
+    width: 90%;
+    height: 90vh;
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/heroimg.jpeg);
+    background-color: rgb(81, 80, 80);
+    color: white;
+    
+}
+.popup-image-holder {
+    width: 15vw;
+    height: 15vw;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+   
+    transform: translate(-50%, -50%)scale(1);
+
+    overflow: hidden;
+
+    /* TOP IMAGE AS HOLDER BACKGROUND */
+    background-image: url('./assets/res1bed/Bedroom\(4\).webp');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform-origin: center center;
+    
+}
+
+.popupimg {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+   
+    transform: translate(-50%, -50%)scale(0);
+
+    transform-origin: center center;
+
+    overflow: hidden;
+
+    will-change: transform;
+    opacity: 0.8;
+}
+
+
+
+
+.popupimg-1 {
+    background-image: url('./assets/office/reception.webp');
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 1;
+}
+
+.popupimg-2 {
+    background-image: url('./assets/res1dining/dinig4.webp');
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 2;
+}
+
+.popupimg-3 {
+    background-image: url('./assets/res1bed/Bedroom\(2\).webp');
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 3;
+}
+
+.popupimg-4 {
+    background-image: url('./assets/boho/bohorestaurant\(11\).webp');
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 4;
+}
+
+.popupimg-5 {
+    background-image: url('./assets/boxroom/boxroom\ \(2\)\ reimagined\ \(1\).webp');
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 5;
+}
+
+
+.popupimg-6 {
+    background-image: url('./assets/res1livin/living6.webp');
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 6;
+}
+
+
+.popupimg-7 {
+    background-image: url('./assets/res1kitch/kitchen\(4\).webp');
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 7;
+}
+
+.popupimg-8 {
+    /* background-image: url('./assets/office/reception.webp'); */
+
+    background-size: cover;
+    background-position: center;
+
+    z-index: 8;
+
+    will-change: transform, filter;
+}
+
+.render-tile {
+    position: absolute;
+
+    background-color: #4c4a35;
+
+    opacity: 1;
+
+    outline: 1px solid #6b6a50;
+
+    transition: opacity 0.1s ease;
+
+    pointer-events: none;
+
+    z-index: 20;
+}
+
+.render-tile.rendered {
+    opacity: 0;
+}
+
+.render-tile.current {
+    /* outline: 1px solid rgba(200, 162, 107, 0.8); */
+
+    box-shadow:
+        inset 0 0 15px rgba(200, 162, 107, 0.25);
+}
+.loading-name-box{
+    width: 100%;
+    height: 25vw;
+    /* background-color: red; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:25vw;
+    color: #f2ecdf;
+    font-family: italiana;
+    position: relative;
+}
+.loading-name-box h1 {
+    font-weight: 400;
+    font-size: 5.5vw;
+}
+
+.namebox-left{
+    width: calc((100% - 20vw)/2);
+    /* background-color: darkblue; */
+    /* position: absolute; */
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden;
+    height: 15vh;
+    align-items: center;
+    line-height: 0;
+
+
+}
+.namebox-left span{
+ 
+display: inline-block;
+
+}
+.namebox-right span{
+ 
+    display: inline-block;
+    
+    }
+    
+.namebox-right{
+    width: calc((100% - 20vw)/2);
+    /* background-color: darkblue; */
+    justify-content: flex-start;
+    display: flex;
+    height: 15vh;
+    align-items: center;
+    line-height: 0;
+    overflow: hidden;
+
+
+}
+
+ .loading-bar{
+    width: 100%;
+    height: 10vh;
+    /* background-color: #f2ecdf; */
+    position: absolute;
+    bottom: 1%;
+    left: 0%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    padding: 0vw 0.5vw;
+    font-family: italiana;
+    font-size: 1.5vw;
+    color: #f2ecdf;
+
+}
+.loading-bar h5 {
+    font-weight: 300;
+}
+nav{
+    width: 100%;
+    height: 10vh;
+    /* background-color: red; */
+    padding: 0vw 1vw ;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: fixed;
+    top: 0%;
+    z-index: 4;
+}
+.menu{
+    width: 3vw;
+    height: 3vw;
+    /* background-color: rgb(212, 211, 211); */
+    border-radius: 50%;
+   border: none;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   
+}
+.menu i{
+    font-size: 1.5vw;
+}
+.menu-page{
+    width: 0%;
+    height: 100vh;
+    background-color: rgb(89, 87, 87);
+    position: fixed;
+    top:0%;
+    right:0%;
+    transform: translate(0%,0%) ;
+    z-index: 5;
+    /* pointer-events: none; */
+    opacity: 0;
+    transform-origin: center right;
+    overflow: hidden;
+
+}
+.close-menu{
+    width: 3vw;
+    height: 3vw;
+    /* background-color: rgb(212, 211, 211); */
+    /* border-radius: 50%; */
+   border: none;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   
+}
+.close-menu i{
+    font-size: 2.5vw;
+    color: #ececec;
+}
+.menupagenav{
+    justify-content: flex-start;
+}
+
+.interactionpageholder{
+    width: 50vw;
+    height: 70vh;
+    /* background-color: red; */
+    bottom: 0%;
+    right: 0%;
+    position: absolute;
+    font-family: italiana;
+    font-size: 1.6vw;
+
+}
+.projectinteraction{
+    width: 50vw ;
+    height: 70vh;
+    background-color: #BDB8B2;
+    
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 3vw 2vw;
+    transform-origin: right bottom;
+    scale: 1;
+    cursor: pointer;
+
+    
+}
+.aboutinteraction{
+    width: 45vw ;
+    height: 50vh;
+    background-color: #D9D6CF;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 3vw 2vw;
+    transform-origin: right bottom;
+    scale: 1;
+    cursor: pointer;
+    
+}
+.contactinteraction{
+    width: 40vw ;
+    height: 30vh;
+    background-color: #E6E5E0;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 3vw 2vw;
+    transform-origin: right bottom;
+    scale: 1;
+    cursor: pointer;
+
+}
+.interactionpageholder h1{
+    line-height: 1;
+    font-weight: 300;
+    color: #3C3E4B;
+}
+.select-box{
+    width: 40vw;
+    height: 20vh;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: montserrat;
+    font-size: 2vw;
+    color: #D9D6CF;
+    position: absolute;
+    left: 0%;
+    bottom: 0%;
+    padding: 0vw 2vw;
+}
+.select-box h1{
+    font-weight: 480;
+    color: #D9D6CF;
+
+}
+
+.information{
+    width: 100%;
+    height: 120vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+    overflow: hidden;
+}
+
+.information p{
+    width: 60%;
+    font-family:renade;
+    font-size: 2.4vw;
+    opacity: 0.7;
+    /* background-color: rgba(255, 251, 251, 0.068); */
+    color: #ffffff;
+    mix-blend-mode: difference;
+    text-align:center;
+    font-weight: 550;
+    /* letter-spacing: 1px; */
+    z-index: 3;
+}
+.infopageimage{
+    position: absolute;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+}
+
+.infopageimage img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150%;
+    height: 160%;
+    object-fit: cover;
+    display: block;
+    will-change: transform;
+
+}
+.ip2i1{
+    width: 16vw;
+    height: 17vw;
+    top: 30%;
+    right: 14%;
+
+}
+.ip2i2{
+    width: 15vw;
+    height: 21vw;
+    top: 52%;
+    left: 12%;
+    
+}
+.ip2i3{
+    width: 15vw;
+    height: 20vw;
+    top:76% ;
+    right: 33%;
+    
+}
+.about-studio{
+    width: 100%;
+    height: 200vh;
+    /* background-color: #f9f4ee; */
+    position: relative;
+}
+.studio-head{
+    width: 100%;
+    height: 75vh;
+    background-color: #87857C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4vw;
+    padding: 4vw;
+    position: relative;
+    overflow: hidden;
+}
+.studio-head h2{
+    font-family: xanh;
+    font-size: 2.5vw;
+    /* line-height: 3vw; */
+    color: #f9f4ee;
+    font-weight: 500;
+    text-align: center;
+    width: 70%;
+    z-index: 2;
+
+}
+.studio-head h5{
+    font-family: renade;
+    font-size: 1.2vw;
+    /* line-height: 3vw; */
+    color: #f9f4ee;
+    font-weight: 300;
+    text-align: center;
+    width: 70%;
+    letter-spacing: 1px;
+
+}
+.studioheadfooter{
+    font-family:renade;
+    font-size: 1.2vw;
+    color: #f9f4ee;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translate(-50%,0%);
+    font-weight: 100;
+}
+.cursivebranding {
+    /* background-color: teal; */
+    width: fit-content;
+    height: 20vh;
+    font-family: mld;
+    font-size: 10vw;
+    color: #D0C99D;
+    font-weight: 50;
+    white-space: nowrap;
+    line-height: 0;
+    position: absolute;
+    top: 40%;
+    left: 0%;
+    transform: translate(0%,-50%);
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    /* justify-content: center; */
+    gap: 0vw;
+    padding: 0vw 2vw;
+    animation-name: run;
+    animation-duration: 95s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.cursivebranding h1 {
+    font-weight: 50;
+}
+@keyframes run {
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(-50%);
+    }
+}
+
+.wave {
+    width: 100%;
+    height: 20vh;
+    background-color: #87857C;
+    
+    margin-top: -1px;
+    line-height: 0;
+}
+
+.wave svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+.services{
+    width: 100%;
+    height: 100vh;
+    /* background-color: rgb(247, 198, 198); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5vw;
+    padding: 2vw 1vw;
+}
+.service-txt-box{
+    width:60%;
+    height: 100%;
+    /* background-color: green; */
+}
+.service-prototype{
+    width:40%;
+    height: 100%;
+    /* background-color: green; */
+    position: relative;
+    overflow: hidden;
+}
+.servicepro{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    /* background-color: red; */
+    /* position: absolute; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    /* transform-origin: center center; */
+}
+.spro2{
+ top: 100%;
+ left: 50%;
+ transform: translate(-50%,0%);
+
+}
+.spro3{
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%,0%);
+}
+.servicepro img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    filter: saturate(1);
+  
+    
+    
+}
+.pro1{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* top: 50%;
+    left:50%; */
+    /* transform: translate(-50%,-50%) scale(1) rotate(0); */
+    /* background-color: fuchsia; */
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/boxroom/boxroom\ \(1\)\ reimagined\ \(1\).webp);
+    transform-origin: center center;
+}
+.pro2{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* background-color: rgb(0, 255, 145); */
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/office/reception.webp);
+    z-index: 2;
+}
+.pro3{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    /* background-color: rgb(21, 0, 255); */
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/boho/bohorestaurant\(13\).webp);
+    z-index: 3;
+}
+.about-end{
+    width: 100%;
+    height: 100vh;
+    background-color:#84603c ;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+
+}
+.top-about-end{
+    width: 100%;
+    height: 40%;
+    /* background-color: green; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family:xanh ;
+    font-size: 1.4vw;
+    /* color: #4c4a35; */
+    color: #f9f4ee;
+
+}
+.top-about-end h3{
+    font-weight: 500;
+    width: 75%;
+    /* font-style: italic; */
+}
+.bottom-about-end {
+    width: 100%;
+    height: 60%;
+    /* background-color: rgb(128, 64, 0); */
+    display: flex;
+   
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    font-family:montserrat;
+    font-size: 1.1vw;
+    color: #f0efed;
+    
+}
+.aboutendtextbot{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-start;
+    text-align: left;
+    position: relative;
+    gap: 2vw;
+    /* background-color: red; */
+    /* padding-left: 3vw; */
+}
+.aboutendtextbot h5{
+    font-weight: 550;
+    width: 70%;
+    
+}
+.aboutbotimagebox{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    /* background-color: tan; */
+}
+.aboutbotprototype{
+    width: 20vw;
+    height: 25vw;
+    /* background-color: red; */
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/parlour/1756920966387.jpeg.jpg.webp);
+}
+.dummy{
+    width: 100%;
+    height:calc(1100px + 95vh);
+    background-color: transparent;
+    pointer-events: none;
+    z-index: 0;
+}
+.page-project-overview{
+    width: 100%;
+    height: 270vh;
+    /* background-color: red; */
+    position: relative;
+    /* perspective: 1000px; 
+    transform-style: preserve-3d; */
+    /* z-index: 2; */
+    
+
+}
+.projectoverviewdescription-box{
+    width: 100%;
+    height: 100vh;
+    /* background-color: rgba(255, 255, 0, 0.428); */
+    position: absolute;
+    top: 0%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    
+    /* z-index: 1; */
+   
+   
+   
+}
+.projectoverviewdescription-box h3{
+    min-width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    font-family: xanh;
+    font-size: 2.4vw;
+    font-weight: 580;
+    color: #b9b9b85d;
+    letter-spacing: 2px;
+    text-transform:uppercase;
+   
+    
+    
+    
+}
+.line1{
+    width: 1px;
+    height: 12vw;
+    background-color: #9f7d5b;
+    position: absolute;
+    top: 0%;
+    left:3%;
+    /* z-index: 5; */
+
+}
+.projectoverviewdescription-box span{
+    display: inline-block;
+}
+.projectoverviewdescription-box h2{
+    width: 70%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    text-align: center;
+    font-family:xanh;
+    font-size: 2vw;
+    font-weight: 450;
+  color:" #534638";
+  text-transform: uppercase;
+    
+}
+.pos2{
+    display: inline-block;
+    opacity: 0;
+    
+
+}
+.poimage1{
+    width: 20vw;
+    height: 28vw;
+    /* background-color: rgb(0, 51, 255); */
+    position: absolute;
+    right: 1%;
+    top: 5%;
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/boxroom/boxroom\ \(1\)\ reimagined\ \(1\).webp);
+
+
+}
+.poimage1 .render-tile,
+.poimage2 .render-tile,
+.poimage3 .render-tile,
+.poimage4 .render-tile,
+.poimage5 .render-tile {
+    position: absolute;
+    z-index: 2;
+    background-color:#525046;
+    pointer-events: none;
+    /* border-color: #675440; */
+    outline:1px solid #23221a30;
+    /* border: none;
+    box-shadow: none; */
+}
+.poimage2{
+    width: 15vw;
+    height: 18vw;
+    /* background-color: rgb(0, 51, 255); */
+    position: absolute;
+    left: 1%;
+    top:25%;
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/office/cabin-img-for-hero-sec.jpg.jpeg);
+    /* z-index: 2; */
+
+}
+.poimage3{
+    width: 23vw;
+    height: 15vw;
+    /* background-color: rgb(0, 51, 255); */
+    position: absolute;
+    right: 1%;
+    top: 82%;
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/res1livin/living5.webp);
+    /* z-index: 2; */
+
+}
+.poimage4{
+    width: 16vw;
+    height: 21vw;
+    /* background-color: rgb(0, 51, 255); */
+    position: absolute;
+    right: 5%;
+    top: 53%;
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/res1dining/dinig1.webp);
+    /* z-index: 2; */
+
+}
+.poimage5{
+    width: 23vw;
+    height: 26vw;
+    /* background-color: rgb(0, 51, 255); */
+    position: absolute;
+    left: 2%;
+    top: 67%;
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/res1bed/Bedroom\(3\).webp);
+    /* z-index: 2; */
+
+}
+.select-box{
+    width: 25vw;
+    height: 45vh;
+    /* background-color: darkblue; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    font-family: xanh;
+    text-align: center;
+    padding: 1vw;
+    color: #23221a;
+    z-index: 2;
+
+
+    
+}
+.select-box h4{
+    opacity: 1;
+    /* font-family: montserrat; */
+    font-weight: 450;
+    font-size: 3.2vw;
+    /* y:30; */
+    z-index: 2;
+
+
+}
+.select-box h6{
+    margin-top: 6vw;
+    width: 65%;
+    font-family: montserrat;
+    font-weight: 550;
+    font-size: 1vw;
+    z-index: 2;
+
+    opacity: 1;
+
+}
+.dummy2{
+    width: 100%;
+    height:100vh;
+    background-color: transparent;
+    pointer-events: none;
+    z-index: 0;
+}
+.horizontal-projectpage{
+    width: 100%;
+    height: 100vh;
+   background-color: #414040;
+    position: relative;
+    overflow: hidden;
+    
+   
+}
+.horizontaldefault{
+width: 100%;
+height: 100%;
+/* background-color: rgb(155, 59, 59); */
+background-color: #f9f4ee;
+
+position: absolute;
+bottom: 0%;
+left: 0%;
+/* transform: translate(-50%,-50%); */
+scale: 1;
+filter: saturate(1);
+
+/* transform-origin: bottom left; */
+
+}
+.horizontalprojpage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f4ee;
+    padding: 1vw;
+    flex-direction: column;
+
+}
+.hpp1{
+    width: 100%;
+    height: 100%;
+/* background-color: rgb(155, 136, 59); */
+position: absolute;
+bottom: -25%;
+left: 110%;
+/* transform: translate(-50%,-50%); */
+scale: 1;
+/* rotate:10deg; */
+z-index: 3;
+filter: saturate(1);
+/* transform-origin: bottom left; */
+
+
+}
+.hpp2{
+    width: 100%;
+    height: 100%;
+/* background-color: rgb(193, 113, 88); */
+position: absolute;
+bottom: -25%;
+left: 110%;
+/* transform: translate(-50%,-50%); */
+scale: 1;
+/* rotate:10deg; */
+z-index: 4;
+filter: saturate(1);
+
+/* transform-origin: bottom left; */
+
+
+}
+.hpp3{
+    width: 100%;
+    height: 100%;
+/* background-color: rgb(136, 59, 155); */
+position: absolute;
+bottom: -25%;
+left: 110%;
+/* transform: translate(-50%,-50%); */
+scale: 1;
+/* rotate:10deg; */
+z-index: 5;
+/* filter: saturate(1); */
+
+/* transform-origin: bottom left; */
+
+
+}
+.hpptop{
+    width: 100%;
+    height: 20%;
+    /* background-color: pink; */
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    /* padding: 2vw; */
+    /* flex-direction: column; */
+    position: relative;
+    padding: 1vw 0vw;
+    /* gap: 3vw; */
+}
+.hppbottom{
+    width: 100%;
+    height:80%;
+    /* background-color: rgb(44, 2, 9); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* padding: 2vw; */
+    position: relative;
+}
+.hpptopimgbox{
+    width: 17vw;
+    height:20vw ;
+    margin-top: 9vw;
+    position: relative;
+    /* background-color: green; */
+    
+}
+.hpptopimgbox::before{
+    content: "";
+    width: 14vw;
+    height: 10vw;
+    /* background-color: red; */
+    background-color: #f9f4ee;
+    position: absolute;
+    top: 0%;
+    left: 102%;
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/res1bed/Bedroom\(3\).webp);
+}
+.hppbottomimgbox{
+    width: 100%;
+    height: 100%;
+    
+    /* background-color: green; */
+    
+}
+
+.hpp1 > .hppbottom .hppbottomimgbox {
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/res1bed/Bedroom\(3\).webp);
+}
+.hpp2 > .hppbottom .hppbottomimgbox {
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/boho/bohorestaurant\(13\).webp);
+}
+.hpp3 > .hppbottom .hppbottomimgbox {
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/res1dining/dinig1.webp);
+}
+
+
+
+.hpptop h1{
+font-family: excon;
+font-size: 6vw;
+color: #5a4128;
+font-weight: 400;
+white-space: nowrap;
+line-height: 5vw;
+}
+.hpptop h2{
+    font-family: excon;
+    font-size: 5vw;
+    color: #5a4128;
+    font-weight: 400;
+    white-space: nowrap;
+    line-height: 4vw;
+    }
+.hpptop h5{
+    font-family: montserrat;
+    font-size: 1.2vw;
+    color: #8a6541;
+    font-weight: 600;
+    width: 6vw;
+    /* line-height: 6vw; */
+    }
+    .viewall{
+        width: 15vw;
+        height: 4vw;
+        border-radius: 2.5vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: xanh;
+       font-size: 1.5vw;
+       background-color: #84603c;
+       color: #f9f4ee;
+    }
+    .viewall h4{
+        font-weight: 400;
+    }
+    .defaultpagewrapper{
+        width: 100%;
+        height: 100vh;
+        /* background-color: blue; */
+        background-color: #f9f4ee;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+    }
+    .defaultpageimgbox1{
+        width: 10vw;
+        height: 8.5vw;
+        /* position: absolute; */
+        background-color: black;
+        /* top: 50%; */
+        /* left: 50%; */
+        /* transform: translate(-50%,-50%); */
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/boxroom/boxroom\ \(1\)\ reimagined\ \(1\).webp);
+    }
+
+    
+    .defaultpageimgbox2{
+        width: 10vw;
+        height: 13vw;
+        /* position: absolute; */
+        background-color: rgba(161, 90, 90, 0.647);
+        /* top: 50%; */
+        /* left: 50%; */
+        /* transform: translate(-50%,-50%); */
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/office/cabin-img-for-hero-sec.jpg.jpeg);
+    }
+    .defaultpageimgbox3{
+        width: 10vw;
+        height: 6.5vw;
+        /* position: absolute; */
+        background-color: rgba(161, 90, 90, 0.647);
+        /* top: 50%; */
+        /* left: 50%; */
+        /* transform: translate(-50%,-50%); */
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/parlour/1756920966387.jpeg.jpg.webp);
+    }
+    .defaultpageimgbox4{
+        width: 10vw;
+        height: 13vw;
+        /* position: absolute; */
+        background-color: rgba(161, 90, 90, 0.647);
+        /* top: 50%; */
+        
+        /* left: 50%; */
+        /* transform: translate(-50%,-50%); */
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/res1livin/living5.webp);
+
+    } 
+    .defaultpageimgbox5{
+        width: 10vw;
+        height: 8.5vw;
+        /* position: absolute; */
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/office/reception.webp);
+    }
+    .defaultpageimgbox6{
+        width: 10vw;
+        height: 13vw;
+        /* position: absolute; */
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/res1bath/washroom\(2\).webp);
+    }
+    .defaultpageimgbox7{
+        width: 10vw;
+        height: 6.5vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/res1kids/kids\ room\ front\ left.webp);
+    }
+    .defaultpageimgbox8{
+        width: 10vw;
+        height: 13vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/boho/bohorestaurant\(10\).webp);
+    }
+    .defaultpageimgbox9{
+        width: 10vw;
+        height: 8.5vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/res1bed/Bedroom\(1\).webp);
+    }
+    .defaultpageimgbox10{
+        width: 10vw;
+        height: 13vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/boxroom/boxroom\ \(2\)\ reimagined\ \(1\).webp);
+    }
+    .defaultpageimgbox11{
+        width: 10vw;
+        height: 6.5vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/res1kitch/kitchen\(4\).webp);
+    }
+    .defaultpageimgbox12{
+        width: 10vw;
+        height: 13vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/res1livin/living3.webp);
+    }
+    .defaultpageimgbox13{
+        width: 10vw;
+        height: 8.5vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/parlour/1756920966387.jpeg.jpg.webp);
+    }
+    .defaultpageimgbox14{
+        width: 10vw;
+        height: 13vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/boho/bohorestaurant\(1\).webp);
+    }
+    .defaultpageimgbox15{
+        width: 10vw;
+        height: 6.5vw;
+        background-color: rgba(161, 90, 90, 0.647);
+        background-position: center;
+        background-size: cover;
+        background-image: url(./assets/res1bath/washroom\(4\).webp);
+    }
+    .default-bottom{
+        width: 100%;
+        height: 30vh;
+        background-color: red;
+        font-family: xanh;
+        font-size: 4vw;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        color: #695645;
+        padding: 1vw;
+        gap: 1vw;
+        overflow: hidden;
+        position: relative;
+
+    }
+    .defaultslidewrapper{
+        width: 350vw;
+        height: 100%;
+        background-color: rgb(230, 226, 222);
+        font-family: xanh;
+        font-size: 4vw;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        color: #695645;
+        padding: 1vw;
+        gap: 1vw;
+        position: absolute;
+        left: 0%;
+        animation-name: run;
+        animation-duration: 60s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+
+    }
+    .dpib{
+        position: relative;
+    }
+    .dpib::before{
+        content: "project 0/01";
+        font-family: xanh;
+        position: absolute;
+        top: 100%;
+        left: 0%;
+        font-weight: 500;
+        font-size: 0.8vw;
+    }
+    
+    .default-txt span{
+        display: inline-block;
+        font-weight: 500;
+    }
+    .default-txt{
+        position: absolute;
+        width: 100%;
+        height: 60vh;
+        /* background-color: red; */
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 1vw;
+        left: 0%;
+        top: 10%;
+        font-family: xanh;
+        font-size: 4vw;
+        color: #2d2c2c;
+        /* transform: translate(0%,-50%); */
+
+
+
+    }
+    .last-project-des{
+        width: 100%;
+        height: 70vh;
+       
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        /* flex-direction: column; */
+        gap: 1vw;
+        padding: 1vw;
+        position: relative;
+        /* background-color: rebeccapurple; */
+    }
+    .last-proj-des-paras{
+        width: 50%;
+        height: 50vh;
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-end;
+        flex-direction: column;
+        gap: 2vw;
+        padding: 2vw;
+        /* background-color: darkblue; */
+    }
+    .last-proj-des-paras h5{
+        font-family: xanh;
+        font-size: 1.2vw;
+        width: 70%;
+        font-weight: 400;
+        text-align: left;
+        color: #695645;
+    }
+    .last-proj-des-paras h6{
+        font-family: excon;
+        font-size: 1.7vw;
+        width: 100%;
+        font-weight: 500;
+        text-align: left;
+        color: #503923;
+    }
+    .last-proj-des-img{
+        width: 50%;
+        height: 50vh;
+        /* background-color: #84603c; */
+       
+        display: flex;
+        align-items: center;
+        justify-content: center;
+       padding: 1vw;
+    }
+    .last-proj-des-img img{
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+    }
+   .viewbutton{
+    width: 15vw;
+    height: 4vw;
+    border-radius: 2.4vw;
+    background-color: #84603c;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: xanh;
+    font-size: 0.9vw;
+    color: #f9f4ee;
+    cursor: pointer;
+   }
+   .viewbutton h3{
+    font-weight: 400;
+   }
+   .circle-text {
+    width: 10vw;
+    height: 10vw;
+    /* background-color: #503923; */
+    position: absolute;
+    bottom: calc(0% + 2vw);
+    left: calc(50% + 1vw);
+    transform: translate(-50%,50%) rotate(0);
+    animation: rotateCircle 12s linear infinite;
+    }
+    
+    .circle-text svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    }
+    
+    .circle-text text {
+    fill: #5039236f;
+    font-size: 1.8vw;
+    letter-spacing: 2px;
+    font-family: xanh;
+    }
+    
+    @keyframes rotateCircle {
+    to {
+        transform: translate(-50%,50%) rotate(360deg);
+    }
+    }
+    .go-to-behance-box {
+        width: 100%;
+        height: 50vh;
+        background-color: salmon;
+        /* position: absolute; */
+        /* top: 740vh; */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        z-index: 5;
+        overflow: hidden;
+        position: relative;
+        margin-top: 15vw;
+    }
+    
+    .check-txt {
+        width: 60%;
+        position: absolute;
+        left: 0%;
+        top: 50%;
+        transform: translate(0%, -50%);
+        height: 15vh;
+        /* background-color: rebeccapurple; */
+        font-family: montserrat;
+        font-weight: 500;
+        font-style: italic;
+        white-space: nowrap;
+        letter-spacing: -7px;
+        color: #3C3C3C;
+        opacity: 0;
+    
+    }
+    
+    .check-txt h1 {
+        font-size: 6.2vw;
+    
+        font-weight: 380;
+    
+    }
+    
+    .go-to-txt1 h1 {
+        font-size: 7vw;
+        font-weight: 400;
+        white-space: nowrap;
+        letter-spacing: -5.5px;
+        color: #3C3C3C;
+        font-family: montserrat;
+        display: block;
+        opacity: 1;
+    
+    
+    }
+    
+    .go-to-txt2 {
+        width: 70%;
+        height: 15vh;
+        /* background-color: darkblue; */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5vw;
+    
+    }
+    
+    .go-to-txt2 h1 {
+        font-size: 6.8vw;
+        font-weight: 400;
+        white-space: nowrap;
+        letter-spacing: -7px;
+        color: #3C3C3C;
+        opacity: 1;
+        font-family: montserrat;
+    }
+    
+    .go-to-txt2 i {
+        font-size: 6vw;
+        color: #3C3C3C;
+        rotate: -90deg;
+    }
+    .behance-logo-box{
+        width: 100%;
+        height: 30vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+
+    }
+    .behance-logo {
+        width: 9.5vw;
+        height: 9.5vw;
+        /* background-color: rgb(255, 255, 255); */
+        border-radius: 50%;
+        /* position: absolute; */
+        /* left: 50%; */
+        /* top: 796vh; */
+        /* transform: translate(-50%, 0%); */
+    
+        background-image: url(./assets/elements/Gemini_Generated_Image_qyyjfdqyyjfdqyyj.png);
+        background-position: center;
+        background-size: cover;
+    
+        cursor: pointer;
+    
+    
+    }
+    
+
+    
+.behance-sec {
+    width: 100%;
+    height: 110vh;
+    /* background-color: rgb(215, 151, 151); */
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    margin-top: 10vw;
+
+}
+.behance-burn {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+    display: block;
+  
+    /* Above cards and text, inside this section only */
+    z-index:100;
+  
+    pointer-events: none;
+  }
+.card {
+    width: 20vw;
+    height: 30vw;
+    background-color: #7b7a7957;
+    position: absolute;
+    left: 50%;
+    top: 130%;
+    transform: translate(-50%, 0%);
+    border-radius: 1vw;
+    /* border: 2px solid rgba(128, 128, 128, 0.055); */
+    overflow: hidden;
+    padding: 0.1vw;
+    opacity: 0;
+    z-index: 3;
+
+
+
+}
+
+
+.second-card {
+    /* background-color: #7e72af; */
+    /* background-color: #98b4a9; */
+
+    rotate: -10deg;
+    width: 20vw;
+    height: 30vw;
+}
+
+.third-card {
+    /* background-color: #7c938a; */
+    rotate: -5deg;
+}
+
+
+
+.card img {
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.8vw;
+}
+
+.moodboard-txt {
+    width: 100%;
+    height: 50vh;
+    /* background-color: saddlebrown; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: montserrat;
+    font-style: italic;
+    font-size: 4vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #3C3C3C;
+    transform: translate(-50%, 0%);
+}
+
+
+.moodboard-txt span {
+    display: inline-block;
+    font-weight: 400;
+    margin-top: 2vw;
+}
+   
+.letsbeginboxwrapper{
+    width: 100%;
+    height: 100vh;
+    /* background-color: red; */
+    /* background-image: url(./assets/boxroom/boxroom\ \(1\)\ reimagined\ \(1\).webp);
+    background-position: center;
+    background-size: cover; */
+    
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.letsbeginboxwrapper img{
+    object-fit: cover;
+    object-position: center;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+ 
+}
+.letsbeginbox{
+    width: 37vw;
+    height: 80vh;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+}
+.letsbeginbox h5{
+    font-family: excon;
+    color: white;
+    /* text-decoration: underline; */
+    font-size: 1.3vw;
+    font-weight: 300;
+}
+.letsleftright{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: #503923; */
+    position: absolute;
+    top: 0%;
+    left:0%;
+}
+.slimboxlr{
+    width: 15vh;
+    height: 100%;
+    background-color: #f9f4ee;
+    
+}
+
+.letstopbottom{
+    position: absolute;
+    top: 0%;
+    left:0%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1;
+    /* background-color: #503923; */
+}
+.slimboxtb{
+    width: 100%;
+    height: 15vh;
+    background-color: #f9f4ee;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: xanh;
+    font-size: 2.2vw;
+    color: #565454;
+    padding: 0vw 2vw;
+    
+}
+.slimboxtb h4{
+    font-weight: 400;
+}
+.slim2nd{
+    margin-left: 2vw;
+}
