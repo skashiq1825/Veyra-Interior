@@ -862,3 +862,5 @@ gsap.from(".moodboard-txt span", {
 
   }
 });
+
+

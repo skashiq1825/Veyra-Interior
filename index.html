@@ -9,6 +9,14 @@
 
     <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
     <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+          }
+        }
+        </script>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.css" rel="stylesheet">
 </head>
 
@@ -52,7 +60,28 @@
 
             </nav>
             <div class="hero-sec">
-                hero-sec
+                 <div id="canvas-container"></div>
+
+  <div id="topbar">
+    <div class="brand">VEYRA INTERIOR</div>
+    <div class="model-status" id="model-status">LOADING MODEL</div>
+  </div>
+
+  <div id="instructions">
+    LEFT CLICK + DRAG — ROTATE<br>
+    SCROLL — ZOOM<br>
+    RIGHT CLICK + DRAG — PAN
+  </div>
+
+  <div id="loader">
+    <div class="loader-title">Loading 3D Model</div>
+    <div class="loader-line">
+      <div class="loader-line-inner" id="loader-progress"></div>
+    </div>
+    <div class="loader-progress" id="loader-percentage">0%</div>
+  </div>
+
+  <div id="error-message"></div>
             </div>
 
         </section>
@@ -480,6 +509,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
     <script src="script.js"></script>
+    <script type="module" src="hero3d.js"></script>
 </body>
 
 </html>
