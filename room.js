@@ -12,15 +12,14 @@
      *   material "Emissive WALL"             -> LED cove glow
      *   material "centre table lamp"         -> table lamp light
      *   material "SDT-2800 K"                -> bubble floor lamp glow
-     * Furniture placeholders are called  placeholder-sofa / placeholder-armchair / placeholder-table
-     * and are swapped for your own GLB files by furniture.js.
      */
-    // ==========================================
-  // LOUNGE CHAIR  (S-curve ribbon, puffy faces)
-  // ==========================================
   
-  // Centre-line of the ribbon, side view: [x = front->back, y = height]
-  const CHAIR_PATH = [
+    // ==========================================
+    // LOUNGE CHAIR  (S-curve ribbon, puffy faces)
+    // ==========================================
+  
+    // Centre-line of the ribbon, side view: [x = front->back, y = height]
+    const CHAIR_PATH = [
       [0.14, 0.10],   // front foot (end)
       [0.14, 0.22],
       [0.18, 0.32],
@@ -38,19 +37,18 @@
       [1.54, 0.60],
       [1.54, 0.36],   // back slab
       [1.54, 0.10]    // back foot (end)
-  ];
+    ];
   
-  const CHAIR = {
+    const CHAIR = {
       width:     0.95,   // chair width (extrusion)
       thickness: 0.09,   // ribbon thickness (final ≈ thickness + 2*bevel)
       bevel:     0.03,   // soft edge size
       bulge:     0.03,   // puff amount (0 = flat)
       round:     0.6     // lower = fuller bubble
-  };
+    };
   
-  
-  // ---------- helper 1: puffs the ribbon faces outward ----------
-  function chairPuff(geometry, shape, depth, bulge, round, bevel) {
+    // ---------- helper 1: puffs the ribbon faces outward ----------
+    function chairPuff(geometry, shape, depth, bulge, round, bevel) {
       if (bulge <= 0) return;
   
       const pts = shape.getPoints(1);
@@ -59,44 +57,43 @@
       const n = pts.length;
       let area = 0;
       for (let i = 0; i < n; i++) {
-          const a = pts[i], b = pts[(i + 1) % n];
-          area += a.x * b.y - b.x * a.y;
+        const a = pts[i], b = pts[(i + 1) % n];
+        area += a.x * b.y - b.x * a.y;
       }
       const sign = area > 0 ? 1 : -1;
   
       const segs = [];
       for (let i = 0; i < n; i++) {
-          const a = pts[i], b = pts[(i + 1) % n];
-          const dx = b.x - a.x, dy = b.y - a.y;
-          const l = Math.hypot(dx, dy) || 1e-9;
-          segs.push({ ax: a.x, ay: a.y, dx, dy, l2: l * l, nx: sign * dy / l, ny: -sign * dx / l });
+        const a = pts[i], b = pts[(i + 1) % n];
+        const dx = b.x - a.x, dy = b.y - a.y;
+        const l = Math.hypot(dx, dy) || 1e-9;
+        segs.push({ ax: a.x, ay: a.y, dx, dy, l2: l * l, nx: sign * dy / l, ny: -sign * dx / l });
       }
   
       const pos = geometry.attributes.position;
       const total = depth + 2 * bevel;
   
       for (let i = 0; i < pos.count; i++) {
-          const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+        const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
   
-          let best = null, bd = Infinity;
-          for (const s of segs) {
-              const t = Math.max(0, Math.min(1, ((x - s.ax) * s.dx + (y - s.ay) * s.dy) / s.l2));
-              const ex = x - (s.ax + t * s.dx), ey = y - (s.ay + t * s.dy);
-              const d = ex * ex + ey * ey;
-              if (d < bd) { bd = d; best = s; }
-          }
+        let best = null, bd = Infinity;
+        for (const s of segs) {
+          const t = Math.max(0, Math.min(1, ((x - s.ax) * s.dx + (y - s.ay) * s.dy) / s.l2));
+          const ex = x - (s.ax + t * s.dx), ey = y - (s.ay + t * s.dy);
+          const d = ex * ex + ey * ey;
+          if (d < bd) { bd = d; best = s; }
+        }
   
-          const u = Math.max(0, Math.min(1, (z + bevel) / total));
-          const w = Math.pow(Math.max(0, Math.sin(Math.PI * u)), round) * bulge;
+        const u = Math.max(0, Math.min(1, (z + bevel) / total));
+        const w = Math.pow(Math.max(0, Math.sin(Math.PI * u)), round) * bulge;
   
-          pos.setXY(i, x + best.nx * w, y + best.ny * w);
+        pos.setXY(i, x + best.nx * w, y + best.ny * w);
       }
       pos.needsUpdate = true;
-  }
+    }
   
-  
-  // ---------- helper 2: smooth normals (removes uv) ----------
-  function chairWeld(geo) {
+    // ---------- helper 2: smooth normals (removes uv) ----------
+    function chairWeld(geo) {
       geo.deleteAttribute('normal');
       geo.deleteAttribute('uv');
   
@@ -104,36 +101,35 @@
       const map = new Map(), out = [], idx = [];
   
       for (let i = 0; i < p.count; i++) {
-          const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
-          const k = Math.round(x * 1e4) + '_' + Math.round(y * 1e4) + '_' + Math.round(z * 1e4);
-          let j = map.get(k);
-          if (j === undefined) { j = out.length / 3; map.set(k, j); out.push(x, y, z); }
-          idx.push(j);
+        const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
+        const k = Math.round(x * 1e4) + '_' + Math.round(y * 1e4) + '_' + Math.round(z * 1e4);
+        let j = map.get(k);
+        if (j === undefined) { j = out.length / 3; map.set(k, j); out.push(x, y, z); }
+        idx.push(j);
       }
   
       geo.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
       geo.setIndex(idx);
-  }
+    }
   
-  
-  // ---------- main: builds the chair ----------
-  function createLoungeChair(options = {}) {
+    // ---------- main: builds the chair ----------
+    function createLoungeChair(options = {}) {
   
       const {
-          name      = 'lounge-chair',
-          material  = new THREE.MeshStandardMaterial({ color: 0x8a9b68, roughness: 0.92 }), // placeholder
-          x = 0, y = 0, z = 0,
-          rotationY = 0,
-          scale     = 1,
-          parent    = null          // e.g. pass `sofa` or `scene` to auto-add
+        name      = 'lounge-chair',
+        material  = new THREE.MeshStandardMaterial({ color: 0x8a9b68, roughness: 0.92 }), // placeholder
+        x = 0, y = 0, z = 0,
+        rotationY = 0,
+        scale     = 1,
+        parent    = null          // e.g. pass `sofa` or `scene` to auto-add
       } = options;
   
       const T = CHAIR.thickness, BS = CHAIR.bevel, h = T / 2;
   
       // 1) centre-line -> smooth curve
       const curve = new THREE.CatmullRomCurve3(
-          CHAIR_PATH.map(p => new THREE.Vector3(p[0], p[1], 0)),
-          false, 'centripetal'
+        CHAIR_PATH.map(p => new THREE.Vector3(p[0], p[1], 0)),
+        false, 'centripetal'
       );
       const c = curve.getPoints(220);
       const n = c.length;
@@ -141,12 +137,12 @@
       // 2) offset both sides to give the ribbon thickness
       const left = [], right = [];
       for (let i = 0; i < n; i++) {
-          const a = c[Math.max(i - 1, 0)], b = c[Math.min(i + 1, n - 1)];
-          const tx = b.x - a.x, ty = b.y - a.y;
-          const l = Math.hypot(tx, ty) || 1e-9;
-          const nx = -ty / l, ny = tx / l;
-          left.push(new THREE.Vector2(c[i].x + nx * h, c[i].y + ny * h));
-          right.push(new THREE.Vector2(c[i].x - nx * h, c[i].y - ny * h));
+        const a = c[Math.max(i - 1, 0)], b = c[Math.min(i + 1, n - 1)];
+        const tx = b.x - a.x, ty = b.y - a.y;
+        const l = Math.hypot(tx, ty) || 1e-9;
+        const nx = -ty / l, ny = tx / l;
+        left.push(new THREE.Vector2(c[i].x + nx * h, c[i].y + ny * h));
+        right.push(new THREE.Vector2(c[i].x - nx * h, c[i].y - ny * h));
       }
   
       // 3) closed outline with rounded end caps (the two feet)
@@ -156,8 +152,8 @@
       const e0 = c[n - 2], e1 = c[n - 1];
       const th1 = Math.atan2(e1.y - e0.y, e1.x - e0.x);
       for (let k = 1; k < K; k++) {
-          const a = th1 + Math.PI / 2 - Math.PI * k / K;
-          outline.push(new THREE.Vector2(e1.x + Math.cos(a) * h, e1.y + Math.sin(a) * h));
+        const a = th1 + Math.PI / 2 - Math.PI * k / K;
+        outline.push(new THREE.Vector2(e1.x + Math.cos(a) * h, e1.y + Math.sin(a) * h));
       }
   
       for (let i = n - 1; i >= 0; i--) outline.push(right[i]);
@@ -165,20 +161,20 @@
       const s0 = c[0], s1 = c[1];
       const th0 = Math.atan2(s1.y - s0.y, s1.x - s0.x);
       for (let k = 1; k < K; k++) {
-          const a = th0 - Math.PI / 2 - Math.PI * k / K;
-          outline.push(new THREE.Vector2(s0.x + Math.cos(a) * h, s0.y + Math.sin(a) * h));
+        const a = th0 - Math.PI / 2 - Math.PI * k / K;
+        outline.push(new THREE.Vector2(s0.x + Math.cos(a) * h, s0.y + Math.sin(a) * h));
       }
   
       const shape = new THREE.Shape(outline);
   
       // 4) extrude across the chair width
       const geometry = new THREE.ExtrudeGeometry(shape, {
-          depth: CHAIR.width,
-          bevelEnabled: true,
-          bevelSegments: 8,
-          steps: 16,
-          bevelSize: BS,
-          bevelThickness: BS
+        depth: CHAIR.width,
+        bevelEnabled: true,
+        bevelSegments: 8,
+        steps: 16,
+        bevelSize: BS,
+        bevelThickness: BS
       });
   
       // 5) puffy faces + smooth shading
@@ -189,9 +185,9 @@
       geometry.computeBoundingBox();
       const bb = geometry.boundingBox;
       geometry.translate(
-          -(bb.min.x + bb.max.x) / 2,
-          -bb.min.y,
-          -(bb.min.z + bb.max.z) / 2
+        -(bb.min.x + bb.max.x) / 2,
+        -bb.min.y,
+        -(bb.min.z + bb.max.z) / 2
       );
       geometry.computeVertexNormals();
   
@@ -205,20 +201,13 @@
   
       if (parent) parent.add(mesh);
       return mesh;
-  }
+    }
   
-  
-  // ==========================================
-  // USAGE
-  // ==========================================
-  // createLoungeChair({
-  //     material: mats.chair,        // your material here
-  //     x: 3.0, y: 0, z: 3.0,        // position in your scene
-  //     rotationY: Math.PI / 2,      // chair front faces -X by default; rotate as needed
-  //     scale: 1,
-  //     parent: scene                // or `sofa` if you want it inside that group
-  // });
+    // ==========================================
+    // BUILD ROOM
+    // ==========================================
     V.buildRoom = function buildRoom() {
+  
       const T = V.textures;
       const root = new THREE.Group(); root.name = 'veyra-room';
   
@@ -251,7 +240,6 @@
       mat('trunk', { color: 0x6c5a3c, roughness: 0.9 });
       mat('[Color_F13]', { color: 0x77994f });
   
-  
       const loadTex = (file, rx, ry) => {
         const t = new THREE.TextureLoader().load('./MODELSWEBSITE/' + file);
         t.encoding = THREE.sRGBEncoding;
@@ -260,7 +248,6 @@
         return t;
       };
   
-      
       mat('left wall', { map: loadTex('wall_lime.jpg', 2, 2), roughness: 0.9 });
   
       // right wall + brown arch panel (wood)
@@ -296,15 +283,15 @@
       // ================= FLOOR, CEILING, OUTER WALLS =================
       slab(0, 8.5, -0.1, 0, 0, 6.0, mats['Dunstone floor'], 'floor');
       slab(0.23, 5.85, -0.1, 0, 6.0, 9.18, withRepeat(mats['Dunstone floor'], 5, 3), 'courtyard-floor');
-      // ================= COURTYARD CENTER PLANTER PANEL =================
   
-  slab(
-      0.65, 3.35,       // X position (left to right)
-      0.00, 0.01,       // Y position (panel height)
-      7.05, 7.95,       // Z position (front to back)
-      mats['ground floor'],
-      'courtyard-center-planter-panel'
-  );
+      // ================= COURTYARD CENTER PLANTER PANEL =================
+      slab(
+        0.65, 3.35,       // X position (left to right)
+        0.00, 0.01,       // Y position (panel height)
+        7.05, 7.95,       // Z position (front to back)
+        mats['ground floor'],
+        'courtyard-center-planter-panel'
+      );
   
       // tray ceiling: higher outer slab + thin dropped panel in the middle, LED strip hides in the gap
       slab(0, 6.11, REC, TOP, 0, 6.21, mats['ceiling wall'], 'ceiling');
@@ -366,7 +353,6 @@
         { z: 5.068, width: 0.15 },
         { z: 5.238, width: 0.066 },
         { z: 5.324, width: 0.066 },
-        // --- continued up to the window wall (previous values were beyond z = 5.95, so they were hidden) ---
         { z: 5.41,  width: 0.066 },
         { z: 5.496, width: 0.066 },
         { z: 5.582, width: 0.13 },
@@ -380,46 +366,26 @@
   
       // ================= WINDOW WALL (z 5.95–6.21) =================
       slab(WIN_X1, 6.11, 0, TOP, 5.95, 6.21, withRepeat(mats['adjacent wall'], (6.11 - WIN_X1) / 0.8, 1 / TOP), 'window-wall-wood');
+  
       // ================= WINDOW WALL — BROWN VERTICAL PANELS =================
-  
-  const windowBrownPanels = [
-      { x:3.31, width: 0.7 },
-      { x:4.41, width: 0.44 },
-      { x:4.89, width: 0.06 },
-      { x:4.99, width: 0.06 },
-      { x:5.09, width: 0.06 },
-      { x:5.19, width: 0.92 },
-  
-      // { x: 5.75, width: 0.066 }
-  ];
-  
-  windowBrownPanels.forEach((p, i) => {
-  
-      slab(
-          p.x,
-          p.x + p.width,
-          0,
-          2.95,
-          5.90,
-          5.95,
-          mats['adjacent wall'],
-          'window-brown-panel-' + i
-      );
-  
-  });
-  
-    const windowBeigePanels = [
-        { x: 4.01,  width: 0.4 },
-        
+      const windowBrownPanels = [
+        { x: 3.31, width: 0.7 },
+        { x: 4.41, width: 0.44 },
+        { x: 4.89, width: 0.06 },
+        { x: 4.99, width: 0.06 },
+        { x: 5.09, width: 0.06 },
+        { x: 5.19, width: 0.92 }
       ];
-      windowBeigePanels.forEach((p, i) => {
-        slab(p.x, p.x + p.width,
-      0, TOP,
-      5.945, 5.95,
-      mats['left wall'],
-      'window-beige-panel-' + i);
+      windowBrownPanels.forEach((p, i) => {
+        slab(p.x, p.x + p.width, 0, 2.95, 5.90, 5.95, mats['adjacent wall'], 'window-brown-panel-' + i);
       });
   
+      const windowBeigePanels = [
+        { x: 4.01, width: 0.4 }
+      ];
+      windowBeigePanels.forEach((p, i) => {
+        slab(p.x, p.x + p.width, 0, TOP, 5.945, 5.95, mats['left wall'], 'window-beige-panel-' + i);
+      });
   
       slab(0, WIN_X0, 0, TOP, 5.95, 6.21, withRepeat(mats.plaster, 0.5, 1.4), 'window-wall-left');
       const frame = mats['[Color_009]'];
@@ -429,7 +395,7 @@
       const glass = new THREE.Mesh(new THREE.PlaneGeometry(WIN_X1 - WIN_X0, H), mats['Glass_Basic_1']);
       glass.position.set((WIN_X0 + WIN_X1) / 2, H / 2, 6.06); add(glass, 'window glass');
   
-      // ================= LED COVE (in the gap around the dropped ceiling panel; lights.js reads this) =================
+      // ================= LED COVE (disabled) =================
       // {
       //   const cove = mats['Emissive WALL'], cy0 = REC - 0.025, cy1 = REC - 0.005;
       //   slab(0.26, 0.34, cy0, cy1, 0.26, 5.86, cove, 'cove-left');
@@ -455,7 +421,7 @@
       // ================= RUG =================
       slab(1.96, 5.15, 0, 0.01, 1.72, 5.72, mats.rug, 'rug');
   
-      // ================= CURTAIN: pleated sheet, 2 vertex rows (curtains.js re-tessellates + animates it) =================
+      // ================= CURTAIN =================
       {
         const x0 = 0.23, x1 = 1.63, pleats = 26, amp = 0.045, z = 5.86, yTop = H;
         const P = [];
@@ -474,7 +440,7 @@
         slab(x0, x1, yTop - 0.05, yTop, z - 0.06, z + 0.06, frame, 'rail-top');
       }
   
-      // ================= BUBBLE FLOOR LAMP (5 glowing spheres on a thin stem) =================
+      // ================= BUBBLE FLOOR LAMP =================
       {
         const gr = new THREE.Group(); gr.name = 'bubble-lamp'; root.add(gr);
         [0.15, 0.41, 0.67, 0.93, 1.19].forEach((y, i) => {
@@ -495,12 +461,12 @@
           for (let i = 0; i < leaves; i++) {
             const lg = new THREE.PlaneGeometry(0.55, 1.8, 1, 8);
             const p = lg.attributes.position;
-            for (let k = 0; k < p.count; k++) { const t = (p.getY(k) + 0.9) / 1.8; p.setZ(k, -0.25 * t * t); }   // arch the blade
+            for (let k = 0; k < p.count; k++) { const t = (p.getY(k) + 0.9) / 1.8; p.setZ(k, -0.25 * t * t); }
             lg.translate(0, 0.9, 0); lg.computeVertexNormals();
             const leaf = new THREE.Mesh(lg, mats['Licuala_Grandis_Leaf2']);
             leaf.position.set(x, 0.95 * scale, z);
             leaf.rotation.order = 'YXZ';
-            leaf.rotation.y = i * 2.399963;                                   // golden angle fan
+            leaf.rotation.y = i * 2.399963;
             leaf.rotation.x = -(0.25 + (i % 5) * 0.16);
             leaf.scale.setScalar(scale * (0.8 + (i % 3) * 0.12));
             add(leaf, 'leaf', gr);
@@ -514,510 +480,660 @@
       }
       */
   
-      // ================= FURNITURE PLACEHOLDERS (replaced by your GLBs) =================
-      // Same footprint / height as the original pieces, so views and lights keep working.
-      // ================= VEYRA CUSTOM ORGANIC SOFA =================
-  
-  {
-      const sofa = new THREE.Group();
-      sofa.name = 'placeholder-sofa';
-      root.add(sofa);
-  
-  
-      // ==========================================
-      // CUSTOM SHAPE BUILDER
-      // ==========================================
-  
-     // ==========================================
-  // BUBBLE SIDE-FACE SETTINGS
+    
   // ==========================================
-  const SIDE_BULGE = 0.035; // how far the faces puff out (0 = straight / old look)
-  const SIDE_ROUND = 1.2;   // lower = fuller bubble, higher = more pillow-in-the-middle
-  const BEVEL_T    = 0.045; // must match bevelThickness in createSofaShape
-  
-  
+  // VEYRA — CUSTOM CURVY MARBLE COFFEE TABLE
+  // WHITE + BLACK MARBLE / GOLD C-SHAPED LEGS
   // ==========================================
-  // HELPER 1: puffs the whole side face outward
-  // (full height incl. both bevels, like a bubble)
-  // ==========================================
-  function puffySideWalls(geometry, shape, depth, bulge, round) {
-      if (bulge <= 0) return;
   
-      const pts = shape.getPoints(32);
-      if (pts.length > 1 && pts[0].distanceTo(pts[pts.length - 1]) < 1e-6) pts.pop();
+  function createCoffeeTable(o = {}) {
   
-      const n = pts.length;
-      let area = 0;
+    const {
+      x = 3.2,
+      z = 3.2,
+      rotationY = 0,
+      scale = 1,
+      legH = 0.25,
+      topT = 0.07,
+      parent = root
+    } = o;
+  
+    function veinTex(bg, vein, n) {
+  
+      const cv = document.createElement('canvas');
+      cv.width = cv.height = 512;
+  
+      const c = cv.getContext('2d');
+  
+      c.fillStyle = bg;
+      c.fillRect(0, 0, 512, 512);
+      c.lineCap = 'round';
+  
+      let s = 7;
+  
+      const rnd = () =>
+        (s = (s * 16807) % 2147483647) / 2147483647;
+  
       for (let i = 0; i < n; i++) {
-          const a = pts[i], b = pts[(i + 1) % n];
-          area += a.x * b.y - b.x * a.y;
+  
+        c.strokeStyle = vein;
+        c.globalAlpha = 0.15 + rnd() * 0.35;
+        c.lineWidth = 0.6 + rnd() * 2.2;
+  
+        c.beginPath();
+  
+        let px = rnd() * 512;
+        let py = rnd() * 512;
+  
+        c.moveTo(px, py);
+  
+        for (let k = 0; k < 8; k++) {
+  
+          px += (rnd() - 0.3) * 70;
+          py += (rnd() - 0.5) * 70 + 30;
+  
+          c.lineTo(px, py);
+        }
+  
+        c.stroke();
       }
-      const sign = area > 0 ? 1 : -1; // keeps "outward" correct for CW or CCW shapes
   
-      const segs = [];
+      const t = new THREE.CanvasTexture(cv);
+  
+      t.wrapS = t.wrapT = THREE.RepeatWrapping;
+      t.repeat.set(0.7, 0.7);
+      t.encoding = THREE.sRGBEncoding;
+  
+      return t;
+    }
+  
+    // MATERIALS
+  
+    const whiteMat = new THREE.MeshStandardMaterial({
+      map: veinTex('#f2f1ed', '#a8a8a8', 14),
+      roughness: 0.15
+    });
+  
+    const blackMat = new THREE.MeshStandardMaterial({
+      map: veinTex('#1c1c1c', '#6a6a6a', 14),
+      roughness: 0.15
+    });
+  
+    const legMat = new THREE.MeshStandardMaterial({
+      color: 0xc9a77a,
+      roughness: 0.45,
+      metalness: 0.3
+    });
+  
+    const grp = new THREE.Group();
+    grp.name = 'custom-table';
+  
+    // TOP OUTLINE
+  
+    const OUTLINE = [
+      [-0.69,  0.00, 0.07],
+      [-0.66, -0.51, 0.06],
+      [ 0.36, -0.46, 0.08],
+      [ 0.69,  0.19, 0.09],
+      [ 0.21,  0.51, 0.08]
+    ];
+  
+    const CUT = {
+      nx: 0.951,
+      nz: 0.308,
+      d: 0.057
+    };
+  
+    // ROUNDED OUTLINE
+  
+    function fillet(P, seg = 8) {
+  
+      const out = [];
+      const n = P.length;
+  
       for (let i = 0; i < n; i++) {
-          const a = pts[i], b = pts[(i + 1) % n];
-          const dx = b.x - a.x, dy = b.y - a.y;
-          const l = Math.hypot(dx, dy) || 1e-9;
-          segs.push({
+  
+        const p = new THREE.Vector2(
+          P[(i + n - 1) % n][0],
+          P[(i + n - 1) % n][1]
+        );
+  
+        const c = new THREE.Vector2(P[i][0], P[i][1]);
+  
+        const q = new THREE.Vector2(
+          P[(i + 1) % n][0],
+          P[(i + 1) % n][1]
+        );
+  
+        const a = p.sub(c);
+        const b = q.sub(c);
+  
+        const r = Math.min(
+          P[i][2],
+          a.length() * 0.45,
+          b.length() * 0.45
+        );
+  
+        a.normalize();
+        b.normalize();
+  
+        const s = c.clone().addScaledVector(a, r);
+        const e = c.clone().addScaledVector(b, r);
+  
+        out.push(
+          ...new THREE.QuadraticBezierCurve(s, c, e).getPoints(seg)
+        );
+      }
+  
+      return out;
+    }
+  
+    // SPLIT WHITE AND BLACK MARBLE
+  
+    function clip(poly, sgn) {
+  
+      const out = [];
+      const n = poly.length;
+  
+      const f = p =>
+        sgn * (
+          CUT.nx * p.x +
+          CUT.nz * p.y -
+          CUT.d
+        );
+  
+      for (let i = 0; i < n; i++) {
+  
+        const a = poly[i];
+        const b = poly[(i + 1) % n];
+  
+        const fa = f(a);
+        const fb = f(b);
+  
+        if (fa >= 0) out.push(a);
+  
+        if ((fa >= 0) !== (fb >= 0)) {
+  
+          const t = fa / (fa - fb);
+  
+          out.push(
+            new THREE.Vector2(
+              a.x + (b.x - a.x) * t,
+              a.y + (b.y - a.y) * t
+            )
+          );
+        }
+      }
+  
+      return out;
+    }
+  
+    // CREATE MARBLE PLATES
+  
+    function plate(poly, material, name) {
+  
+      const bv = 0.006;
+  
+      const shape = new THREE.Shape(
+        poly.map(p => new THREE.Vector2(p.x, -p.y))
+      );
+  
+      const g = new THREE.ExtrudeGeometry(shape, {
+  
+        depth: topT - 2 * bv,
+  
+        bevelEnabled: true,
+        bevelSize: bv,
+        bevelThickness: bv,
+        bevelSegments: 3
+  
+      });
+  
+      g.rotateX(-Math.PI / 2);
+  
+      const m = new THREE.Mesh(g, material);
+  
+      m.position.y = legH + bv;
+      m.name = name;
+  
+      m.castShadow = true;
+      m.receiveShadow = true;
+  
+      grp.add(m);
+    }
+  
+    const outline = fillet(OUTLINE);
+  
+    plate(
+      clip(outline, -1),
+      whiteMat,
+      'table-top-white'
+    );
+  
+    plate(
+      clip(outline, +1),
+      blackMat,
+      'table-top-black'
+    );
+  
+    // C-SHAPED LEGS
+  
+    function leg(
+      name,
+      lx,
+      lz,
+      dir,
+      rx = 0.20,
+      rz = 0.24,
+      t = 0.06
+    ) {
+  
+      const pts = [];
+      const N = 20;
+  
+      for (let i = 0; i <= N; i++) {
+  
+        const a = Math.PI / 2 + Math.PI * i / N;
+  
+        pts.push([
+          rx * Math.cos(a),
+          rz * Math.sin(a)
+        ]);
+      }
+  
+      for (let i = N; i >= 0; i--) {
+  
+        const a = Math.PI / 2 + Math.PI * i / N;
+  
+        pts.push([
+          (rx - t) * Math.cos(a),
+          (rz - t) * Math.sin(a)
+        ]);
+      }
+  
+      const shape = new THREE.Shape(
+        pts.map(p =>
+          new THREE.Vector2(dir * p[0], p[1])
+        )
+      );
+  
+      const g = new THREE.ExtrudeGeometry(shape, {
+  
+        depth: legH - 0.02,
+  
+        bevelEnabled: true,
+        bevelSize: 0.008,
+        bevelThickness: 0.008,
+        bevelSegments: 2
+  
+      });
+  
+      g.rotateX(-Math.PI / 2);
+  
+      const m = new THREE.Mesh(g, legMat);
+  
+      m.position.set(lx, 0.01, lz);
+      m.name = name;
+  
+      m.castShadow = true;
+      m.receiveShadow = true;
+  
+      grp.add(m);
+    }
+  
+    leg('table-leg-1', -0.38, -0.15,  1);
+    leg('table-leg-2',  0.38,  0.00, -1);
+  
+    // FINAL POSITION
+  
+    grp.position.set(x, 0, z);
+    grp.rotation.y = rotationY;
+    grp.scale.setScalar(scale);
+  
+    parent.add(grp);
+  
+    return grp;
+  }
+  
+  
+  // CREATE TABLE IN ROOM
+  
+  createCoffeeTable({
+    x: 3.6,
+    z: 3.0,
+    rotationY: 80,
+    scale: 0.8,
+    parent: root
+  });
+    
+  
+      // ================= VEYRA CUSTOM ORGANIC SOFA =================
+      {
+        const sofa = new THREE.Group();
+        sofa.name = 'placeholder-sofa';
+        root.add(sofa);
+  
+        // ==========================================
+        // BUBBLE SIDE-FACE SETTINGS
+        // ==========================================
+        const SIDE_BULGE = 0.035; // how far the faces puff out (0 = straight / old look)
+        const SIDE_ROUND = 1.2;   // lower = fuller bubble, higher = more pillow-in-the-middle
+        const BEVEL_T    = 0.045; // must match bevelThickness in createSofaShape
+  
+        // HELPER 1: puffs the whole side face outward
+        function puffySideWalls(geometry, shape, depth, bulge, round) {
+          if (bulge <= 0) return;
+  
+          const pts = shape.getPoints(32);
+          if (pts.length > 1 && pts[0].distanceTo(pts[pts.length - 1]) < 1e-6) pts.pop();
+  
+          const n = pts.length;
+          let area = 0;
+          for (let i = 0; i < n; i++) {
+            const a = pts[i], b = pts[(i + 1) % n];
+            area += a.x * b.y - b.x * a.y;
+          }
+          const sign = area > 0 ? 1 : -1;
+  
+          const segs = [];
+          for (let i = 0; i < n; i++) {
+            const a = pts[i], b = pts[(i + 1) % n];
+            const dx = b.x - a.x, dy = b.y - a.y;
+            const l = Math.hypot(dx, dy) || 1e-9;
+            segs.push({
               ax: a.x, ay: a.y, dx, dy, l2: l * l,
               nx: sign * dy / l,
               ny: -sign * dx / l
-          });
-      }
+            });
+          }
   
-      const pos = geometry.attributes.position;
-      const total = depth + 2 * BEVEL_T; // full height including both bevels
+          const pos = geometry.attributes.position;
+          const total = depth + 2 * BEVEL_T;
   
-      for (let i = 0; i < pos.count; i++) {
-          const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
+          for (let i = 0; i < pos.count; i++) {
+            const x = pos.getX(i), y = pos.getY(i), z = pos.getZ(i);
   
-          // nearest outline segment -> outward direction
-          let best = null, bd = Infinity;
-          for (const s of segs) {
+            let best = null, bd = Infinity;
+            for (const s of segs) {
               const t = Math.max(0, Math.min(1, ((x - s.ax) * s.dx + (y - s.ay) * s.dy) / s.l2));
               const ex = x - (s.ax + t * s.dx), ey = y - (s.ay + t * s.dy);
               const d = ex * ex + ey * ey;
               if (d < bd) { bd = d; best = s; }
+            }
+  
+            const u = Math.max(0, Math.min(1, (z + BEVEL_T) / total));
+            const w = Math.pow(Math.max(0, Math.sin(Math.PI * u)), round) * bulge;
+  
+            pos.setXY(i, x + best.nx * w, y + best.ny * w);
           }
+          pos.needsUpdate = true;
+        }
   
-          // 0 at bottom cap -> 1 in the middle -> 0 at top cap
-          const u = Math.max(0, Math.min(1, (z + BEVEL_T) / total));
-          const w = Math.pow(Math.max(0, Math.sin(Math.PI * u)), round) * bulge;
+        // HELPER 2: merges duplicate vertices so normals are smooth
+        function weldGeometry(geo) {
+          geo.deleteAttribute('normal');
+          geo.deleteAttribute('uv');
   
-          pos.setXY(i, x + best.nx * w, y + best.ny * w);
-      }
-      pos.needsUpdate = true;
-  }
+          const p = geo.attributes.position;
+          const map = new Map(), out = [], idx = [];
   
-  
-  // ==========================================
-  // HELPER 2: merges duplicate vertices so normals are smooth
-  // (note: removes uv — fine for plain colour materials)
-  // ==========================================
-  function weldGeometry(geo) {
-      geo.deleteAttribute('normal');
-      geo.deleteAttribute('uv');
-  
-      const p = geo.attributes.position;
-      const map = new Map(), out = [], idx = [];
-  
-      for (let i = 0; i < p.count; i++) {
-          const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
-          const k = Math.round(x * 1e4) + '_' + Math.round(y * 1e4) + '_' + Math.round(z * 1e4);
-          let j = map.get(k);
-          if (j === undefined) {
+          for (let i = 0; i < p.count; i++) {
+            const x = p.getX(i), y = p.getY(i), z = p.getZ(i);
+            const k = Math.round(x * 1e4) + '_' + Math.round(y * 1e4) + '_' + Math.round(z * 1e4);
+            let j = map.get(k);
+            if (j === undefined) {
               j = out.length / 3;
               map.set(k, j);
               out.push(x, y, z);
+            }
+            idx.push(j);
           }
-          idx.push(j);
-      }
   
-      geo.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
-      geo.setIndex(idx);
-  }
+          geo.setAttribute('position', new THREE.Float32BufferAttribute(out, 3));
+          geo.setIndex(idx);
+        }
   
+        // createSofaShape  (used by left / right / middle)
+        function createSofaShape(name, x, z, y, height, material, drawShape) {
   
-  // ==========================================
-  // createSofaShape  (used by left / right / middle)
-  // ==========================================
-  function createSofaShape(name, x, z, y, height, material, drawShape) {
+          const shape = new THREE.Shape();
+          drawShape(shape);
   
-      const shape = new THREE.Shape();
+          const geometry = new THREE.ExtrudeGeometry(shape, {
+            depth: height,
+            bevelEnabled: true,
+            bevelSegments: 8,
+            steps: 12,
+            bevelSize: 0.045,
+            bevelThickness: BEVEL_T,
+            curveSegments: 32
+          });
   
-      // Custom 2D top-view outline
-      drawShape(shape);
+          puffySideWalls(geometry, shape, height, SIDE_BULGE, SIDE_ROUND);
+          weldGeometry(geometry);
   
-      const geometry = new THREE.ExtrudeGeometry(shape, {
-          depth: height,
-          bevelEnabled: true,
-          bevelSegments: 8,
-          steps: 12,                 // was 2 -> more rows so the face can bulge smoothly
-          bevelSize: 0.045,
-          bevelThickness: BEVEL_T,
-          curveSegments: 32
-      });
+          geometry.rotateX(-Math.PI / 2);
+          geometry.computeVertexNormals();
   
-      // Bubble / pillow effect on every side face
-      puffySideWalls(geometry, shape, height, SIDE_BULGE, SIDE_ROUND);
-      weldGeometry(geometry);
+          const mesh = new THREE.Mesh(geometry, material);
+          mesh.position.set(x, y, z);
+          mesh.name = name;
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
   
-      // Convert 2D shape into horizontal sofa geometry
-      geometry.rotateX(-Math.PI / 2);
-      geometry.computeVertexNormals();
+          sofa.add(mesh);
+          return mesh;
+        }
   
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(x, y, z);
-      mesh.name = name;
+        // ==========================================
+        // 1. LEFT SOFA
+        // ==========================================
+        createSofaShape(
+          'sofa-left',
+          5.1, 2.45, 0.02, 0.23,
+          mats.sofa,
   
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
+          function (s) {
+            s.moveTo(-0.22, -0.45);
+            s.lineTo(0.27, -0.45);
+            s.bezierCurveTo(0.33, -0.45, 0.35, -0.42, 0.35, -0.36);
+            s.lineTo(0.35, 0.36);
+            s.bezierCurveTo(0.35, 0.43, 0.32, 0.46, 0.25, 0.48);
+            s.lineTo(-0.25, 0.62);
+            s.bezierCurveTo(-0.32, 0.64, -0.35, 0.60, -0.35, 0.54);
+            s.lineTo(-0.35, -0.37);
+            s.bezierCurveTo(-0.35, -0.43, -0.31, -0.45, -0.22, -0.45);
+            s.closePath();
+          }
+        );
   
-      sofa.add(mesh);
-      return mesh;
-  }
+        // ==========================================
+        // 2. RIGHT SOFA
+        // ==========================================
+        createSofaShape(
+          'sofa-right',
+          4.25, 4.17, 0.02, 0.23,
+          mats.sofa,
   
+          function (s) {
+            s.moveTo(-0.27, -0.35);
+            s.lineTo(0.27, -0.35);
+            s.bezierCurveTo(0.33, -0.35, 0.35, -0.32, 0.35, -0.26);
+            s.lineTo(0.35, 0.45);
+            s.bezierCurveTo(0.35, 0.51, 0.32, 0.55, 0.26, 0.54);
+            s.lineTo(-0.26, 0.35);
+            s.bezierCurveTo(-0.33, 0.33, -0.35, 0.31, -0.35, 0.25);
+            s.lineTo(-0.35, -0.25);
+            s.bezierCurveTo(-0.35, -0.32, -0.33, -0.35, -0.27, -0.35);
+            s.closePath();
+          }
+        );
   
-  // ==========================================
-  // createSofa3DShape  (unchanged — used by backsupport)
-  // ==========================================
-  function createSofa3DShape(name, x, y, z, depth, material, drawShape) {
+        // ==========================================
+        // 3. LONG MIDDLE SOFA
+        // ==========================================
+        createSofaShape(
+          'sofa-middle',
+          5.05, 3.60, 0.02, 0.23,
+          mats.sofa,
   
-      const shape = new THREE.Shape();
+          function (s) {
+            s.moveTo(-0.30, -0.80);
+            s.quadraticCurveTo(-0.30, -0.90, -0.223, -0.836);
+            s.lineTo(0.223, -0.464);
+            s.quadraticCurveTo(0.30, -0.40, 0.30, -0.30);
+            s.lineTo(0.30, 0.50);
+            s.quadraticCurveTo(0.30, 0.60, 0.20, 0.60);
+            s.lineTo(-0.20, 0.60);
+            s.quadraticCurveTo(-0.30, 0.60, -0.30, 0.50);
+            s.closePath();
+          }
+        );
   
-      // 2D profile (X and Y)
-      drawShape(shape);
+        // ==========================================
+        // 4. MIDDLE SOFA BACK SUPPORT
+        // HELPERS: smooth surface fitting (thin-plate spline)
+        // ==========================================
+        function solveLinear(A, b) {
+          const n = b.length;
   
-      const geometry = new THREE.ExtrudeGeometry(shape, {
-          depth: depth,
-          bevelEnabled: true,
-          bevelSegments: 8,
-          bevelSize: 0.045,
-          bevelThickness: 0.045,
-          curveSegments: 32
-      });
-  
-      geometry.computeVertexNormals();
-  
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.position.set(x, y, z);
-      mesh.name = name;
-  
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
-  
-      sofa.add(mesh);
-      return mesh;
-  }
-  
-  
-  // ==========================================
-  // 1. LEFT SOFA
-  // ==========================================
-  createSofaShape(
-      'sofa-left',
-      5.1, 2.45, 0.02, 0.23,
-      mats.sofa,
-  
-      function (s) {
-  
-          s.moveTo(-0.22, -0.45);
-  
-          // Top edge
-          s.lineTo(0.27, -0.45);
-  
-          // Top-right rounded
-          s.bezierCurveTo(
-              0.33, -0.45,
-              0.35, -0.42,
-              0.35, -0.36
-          );
-  
-          // Right edge
-          s.lineTo(0.35, 0.36);
-  
-          // Bottom-right rounded
-          s.bezierCurveTo(
-              0.35, 0.43,
-              0.32, 0.46,
-              0.25, 0.48
-          );
-  
-          // Slanted bottom edge
-          s.lineTo(-0.25, 0.62);
-  
-          // Bottom-left rounded
-          s.bezierCurveTo(
-              -0.32, 0.64,
-              -0.35, 0.60,
-              -0.35, 0.54
-          );
-  
-          // Left edge
-          s.lineTo(-0.35, -0.37);
-  
-          // Top-left rounded
-          s.bezierCurveTo(
-              -0.35, -0.43,
-              -0.31, -0.45,
-              -0.22, -0.45
-          );
-  
-          s.closePath();
-      }
-  );
-  
-  
-  // ==========================================
-  // 2. RIGHT SOFA
-  // ==========================================
-  createSofaShape(
-      'sofa-right',
-      4.25, 4.17, 0.02, 0.23,
-      mats.sofa,
-  
-      function (s) {
-  
-          s.moveTo(-0.27, -0.35);
-  
-          // Top edge
-          s.lineTo(0.27, -0.35);
-  
-          // Top-right rounded corner
-          s.bezierCurveTo(
-              0.33, -0.35,
-              0.35, -0.32,
-              0.35, -0.26
-          );
-  
-          // Right edge
-          s.lineTo(0.35, 0.45);
-  
-          // Bottom-right rounded corner
-          s.bezierCurveTo(
-              0.35, 0.51,
-              0.32, 0.55,
-              0.26, 0.54
-          );
-  
-          // Slanted bottom edge
-          s.lineTo(-0.26, 0.35);
-  
-          // Bottom-left rounded corner
-          s.bezierCurveTo(
-              -0.33, 0.33,
-              -0.35, 0.31,
-              -0.35, 0.25
-          );
-  
-          // Left edge
-          s.lineTo(-0.35, -0.25);
-  
-          // Top-left rounded corner
-          s.bezierCurveTo(
-              -0.35, -0.32,
-              -0.33, -0.35,
-              -0.27, -0.35
-          );
-  
-          s.closePath();
-      }
-  );
-  
-  
-  // ==========================================
-  // 3. LONG MIDDLE SOFA
-  // ==========================================
-  createSofaShape(
-      'sofa-middle',
-      5.05, 3.60, 0.02, 0.23,
-      mats.sofa,
-  
-      function (s) {
-  
-          // Bottom-left corner
-          s.moveTo(-0.30, -0.80);
-  
-          s.quadraticCurveTo(
-              -0.30, -0.90,
-              -0.223, -0.836
-          );
-  
-          // Diagonal edge
-          s.lineTo(0.223, -0.464);
-  
-          // Bottom-right corner
-          s.quadraticCurveTo(
-              0.30, -0.40,
-              0.30, -0.30
-          );
-  
-          // Right edge
-          s.lineTo(0.30, 0.50);
-  
-          // Top-right corner
-          s.quadraticCurveTo(
-              0.30, 0.60,
-              0.20, 0.60
-          );
-  
-          // Top edge
-          s.lineTo(-0.20, 0.60);
-  
-          // Top-left corner
-          s.quadraticCurveTo(
-              -0.30, 0.60,
-              -0.30, 0.50
-          );
-  
-          s.closePath();
-      }
-  );
-      // ==========================================
-      // 4. MIDDLE SOFA BACK SUPPORT
-      // Reference: Image 4
-      // ==========================================
-  // =====================================================
-  // HELPERS: smooth surface fitting (thin-plate spline)
-  // Paste these ABOVE createSofaXYZShape
-  // =====================================================
-  
-  function solveLinear(A, b) {
-      const n = b.length;
-  
-      for (let i = 0; i < n; i++) {
-          let p = i;
-          for (let r = i + 1; r < n; r++) {
+          for (let i = 0; i < n; i++) {
+            let p = i;
+            for (let r = i + 1; r < n; r++) {
               if (Math.abs(A[r][i]) > Math.abs(A[p][i])) p = r;
-          }
-          [A[i], A[p]] = [A[p], A[i]];
-          [b[i], b[p]] = [b[p], b[i]];
+            }
+            [A[i], A[p]] = [A[p], A[i]];
+            [b[i], b[p]] = [b[p], b[i]];
   
-          for (let r = i + 1; r < n; r++) {
+            for (let r = i + 1; r < n; r++) {
               const f = A[r][i] / A[i][i];
               if (!f) continue;
               for (let c = i; c < n; c++) A[r][c] -= f * A[i][c];
               b[r] -= f * b[i];
+            }
           }
-      }
   
-      const x = new Array(n).fill(0);
-      for (let i = n - 1; i >= 0; i--) {
-          let s = b[i];
-          for (let c = i + 1; c < n; c++) s -= A[i][c] * x[c];
-          x[i] = s / A[i][i];
-      }
-      return x;
-  }
-  
-  const tpsPhi = r => (r > 1e-12 ? r * r * Math.log(r) : 0);
-  
-  // Fits a smooth surface Z(x, y) that passes through the boundary points
-  function tpsFit(X, Y, Z) {
-      const n = X.length, M = n + 3;
-      const A = Array.from({ length: M }, () => new Array(M).fill(0));
-      const b = new Array(M).fill(0);
-  
-      for (let i = 0; i < n; i++) {
-          for (let j = 0; j < n; j++) {
-              A[i][j] = tpsPhi(Math.hypot(X[i] - X[j], Y[i] - Y[j]));
+          const x = new Array(n).fill(0);
+          for (let i = n - 1; i >= 0; i--) {
+            let s = b[i];
+            for (let c = i + 1; c < n; c++) s -= A[i][c] * x[c];
+            x[i] = s / A[i][i];
           }
-          A[i][i] += 1e-9;
-          A[i][n] = 1;      A[n][i] = 1;
-          A[i][n + 1] = X[i]; A[n + 1][i] = X[i];
-          A[i][n + 2] = Y[i]; A[n + 2][i] = Y[i];
-          b[i] = Z[i];
-      }
+          return x;
+        }
   
-      const w = solveLinear(A, b);
+        const tpsPhi = r => (r > 1e-12 ? r * r * Math.log(r) : 0);
   
-      return (x, y) => {
-          let f = w[n] + w[n + 1] * x + w[n + 2] * y;
+        // Fits a smooth surface Z(x, y) that passes through the boundary points
+        function tpsFit(X, Y, Z) {
+          const n = X.length, M = n + 3;
+          const A = Array.from({ length: M }, () => new Array(M).fill(0));
+          const b = new Array(M).fill(0);
+  
           for (let i = 0; i < n; i++) {
-              f += w[i] * tpsPhi(Math.hypot(x - X[i], y - Y[i]));
+            for (let j = 0; j < n; j++) {
+              A[i][j] = tpsPhi(Math.hypot(X[i] - X[j], Y[i] - Y[j]));
+            }
+            A[i][i] += 1e-9;
+            A[i][n] = 1;      A[n][i] = 1;
+            A[i][n + 1] = X[i]; A[n + 1][i] = X[i];
+            A[i][n + 2] = Y[i]; A[n + 2][i] = Y[i];
+            b[i] = Z[i];
           }
-          return f;
-      };
-  }
   
+          const w = solveLinear(A, b);
   
-  // =====================================================
-  // MAIN FUNCTION
-  // =====================================================
+          return (x, y) => {
+            let f = w[n] + w[n + 1] * x + w[n + 2] * y;
+            for (let i = 0; i < n; i++) {
+              f += w[i] * tpsPhi(Math.hypot(x - X[i], y - Y[i]));
+            }
+            return f;
+          };
+        }
   
-  function createSofaXYZShape(
-      name, x, y, z, points, material,
-      cornerRadius = 0.25
-  ) {
+        // MAIN FUNCTION
+        function createSofaXYZShape(
+          name, x, y, z, points, material,
+          cornerRadius = 0.25
+        ) {
   
-      // 0. CLEAN INPUT POINTS (remove near-duplicates)
+          // 0. CLEAN INPUT POINTS (remove near-duplicates)
+          const EPS = 0.05;
+          const O = [];
   
-      const EPS = 0.05;
-      const O = [];
+          points.forEach(p => {
+            const v = new THREE.Vector3(...p);
+            if (!O.length || v.distanceTo(O[O.length - 1]) > EPS) O.push(v);
+          });
   
-      points.forEach(p => {
-          const v = new THREE.Vector3(...p);
-          if (!O.length || v.distanceTo(O[O.length - 1]) > EPS) O.push(v);
-      });
+          if (O.length > 1 && O[0].distanceTo(O[O.length - 1]) < EPS) O.pop();
   
-      if (O.length > 1 && O[0].distanceTo(O[O.length - 1]) < EPS) O.pop();
+          const n0 = O.length;
   
-      const n0 = O.length;
+          // 1. SURFACE NORMAL (Newell)
+          const normal = new THREE.Vector3();
   
+          for (let i = 0; i < n0; i++) {
+            const a = O[i], b = O[(i + 1) % n0];
+            normal.x += (a.y - b.y) * (a.z + b.z);
+            normal.y += (a.z - b.z) * (a.x + b.x);
+            normal.z += (a.x - b.x) * (a.y + b.y);
+          }
+          normal.normalize();
   
-      // 1. SURFACE NORMAL (Newell)
+          // 2. ROUND CORNERS (BEZIER)
+          let pts = [];
   
-      const normal = new THREE.Vector3();
+          for (let i = 0; i < n0; i++) {
+            const prev = O[(i - 1 + n0) % n0];
+            const cur  = O[i];
+            const next = O[(i + 1) % n0];
   
-      for (let i = 0; i < n0; i++) {
-          const a = O[i], b = O[(i + 1) % n0];
-          normal.x += (a.y - b.y) * (a.z + b.z);
-          normal.y += (a.z - b.z) * (a.x + b.x);
-          normal.z += (a.x - b.x) * (a.y + b.y);
-      }
-      normal.normalize();
-  
-  
-      // 2. ROUND CORNERS (BEZIER)
-  
-      let pts = [];
-  
-      for (let i = 0; i < n0; i++) {
-          const prev = O[(i - 1 + n0) % n0];
-          const cur  = O[i];
-          const next = O[(i + 1) % n0];
-  
-          const radius = Math.min(
+            const radius = Math.min(
               cornerRadius,
               cur.distanceTo(prev) * 0.4,
               cur.distanceTo(next) * 0.4
-          );
+            );
   
-          const s = cur.clone().add(
+            const s = cur.clone().add(
               prev.clone().sub(cur).normalize().multiplyScalar(radius)
-          );
-          const e = cur.clone().add(
+            );
+            const e = cur.clone().add(
               next.clone().sub(cur).normalize().multiplyScalar(radius)
+            );
+  
+            pts.push(...new THREE.QuadraticBezierCurve3(s, cur, e).getPoints(12));
+          }
+  
+          pts = pts.filter((p, i) =>
+            p.distanceTo(pts[(i - 1 + pts.length) % pts.length]) > 1e-4
           );
   
-          pts.push(...new THREE.QuadraticBezierCurve3(s, cur, e).getPoints(12));
-      }
+          const count = pts.length;
+          const origin = O[0];
   
-      pts = pts.filter((p, i) =>
-          p.distanceTo(pts[(i - 1 + pts.length) % pts.length]) > 1e-4
-      );
+          // 3. LOCAL FRAME (u, v, normal)
+          const u = new THREE.Vector3().subVectors(O[1], O[0]);
+          u.addScaledVector(normal, -u.dot(normal)).normalize();
   
-      const count = pts.length;
-      const origin = O[0];
+          const v = new THREE.Vector3().crossVectors(normal, u).normalize();
   
+          const local = pts.map(p => {
+            const r = p.clone().sub(origin);
+            return { u: r.dot(u), v: r.dot(v), n: r.dot(normal) };
+          });
   
-      // 3. LOCAL FRAME (u, v, normal)
+          // 4. BEVEL SETTINGS
+          const thickness = 0.175;
+          const bevelSize = 0.045;
+          const bevelDepth = 0.03;
+          const bevelSegments = 8;
+          const capSubdivisions = 4;   // higher = smoother face (slower)
   
-      const u = new THREE.Vector3().subVectors(O[1], O[0]);
-      u.addScaledVector(normal, -u.dot(normal)).normalize();
-  
-      const v = new THREE.Vector3().crossVectors(normal, u).normalize();
-  
-      const local = pts.map(p => {
-          const r = p.clone().sub(origin);
-          return { u: r.dot(u), v: r.dot(v), n: r.dot(normal) };
-      });
-  
-  
-      // 4. BEVEL SETTINGS (same proportions as before)
-  
-      const thickness = 0.175;
-      const bevelSize = 0.045;
-      const bevelDepth = 0.03;
-      const bevelSegments = 8;
-      const capSubdivisions = 4;   // higher = smoother face (slower)
-  
-  
-      // 5. TRUE INWARD OFFSET OF THE OUTLINE
-  
-      function offsetContour(d) {
-          return local.map((c, i) => {
+          // 5. TRUE INWARD OFFSET OF THE OUTLINE
+          function offsetContour(d) {
+            return local.map((c, i) => {
               const p = local[(i - 1 + count) % count];
               const q = local[(i + 1) % count];
   
@@ -1033,154 +1149,144 @@
               const k = d / Math.max(bis.dot(n1), 0.5);
   
               return { u: c.u + bis.x * k, v: c.v + bis.y * k, n: c.n };
-          });
-      }
+            });
+          }
   
-  
-      // 6. BEVEL PROFILE
-  
-      const front = [];
-      for (let i = 0; i <= bevelSegments; i++) {
-          const t = (i / bevelSegments) * Math.PI / 2;
-          front.push({
+          // 6. BEVEL PROFILE
+          const front = [];
+          for (let i = 0; i <= bevelSegments; i++) {
+            const t = (i / bevelSegments) * Math.PI / 2;
+            front.push({
               d:   bevelSize * (1 - Math.sin(t)),
               off: -bevelDepth * (1 - Math.cos(t))
-          });
-      }
+            });
+          }
   
-      const back = front.slice().reverse().map(p => ({
-          d: p.d,
-          off: -thickness - p.off
-      }));
+          const back = front.slice().reverse().map(p => ({
+            d: p.d,
+            off: -thickness - p.off
+          }));
   
-      const profile = [...front, ...back];
+          const profile = [...front, ...back];
   
+          // 7. RING VERTICES
+          const vertices = [];
+          const indices = [];
   
-      // 7. RING VERTICES
-  
-      const vertices = [];
-      const indices = [];
-  
-      const toWorld = (c, off) =>
-          origin.clone()
+          const toWorld = (c, off) =>
+            origin.clone()
               .addScaledVector(u, c.u)
               .addScaledVector(v, c.v)
               .addScaledVector(normal, c.n + off);
   
-      const rc = profile.map(p => offsetContour(p.d));
+          const rc = profile.map(p => offsetContour(p.d));
   
-      profile.forEach((p, r) => {
-          rc[r].forEach(c => {
+          profile.forEach((p, r) => {
+            rc[r].forEach(c => {
               const w = toWorld(c, p.off);
               vertices.push(w.x, w.y, w.z);
+            });
           });
-      });
   
-      const rings = profile.length;
+          const rings = profile.length;
   
+          // 8. SIDE STRIPS
+          for (let r = 0; r < rings - 1; r++) {
+            const cur = r * count;
+            const nxt = (r + 1) * count;
   
-      // 8. SIDE STRIPS
-  
-      for (let r = 0; r < rings - 1; r++) {
-          const cur = r * count;
-          const nxt = (r + 1) * count;
-  
-          for (let i = 0; i < count; i++) {
+            for (let i = 0; i < count; i++) {
               const j = (i + 1) % count;
               const a = cur + i, b = cur + j, c = nxt + j, d = nxt + i;
               indices.push(a, c, b, a, d, c);
+            }
           }
-      }
   
+          // 9. FRONT + BACK FACES (smooth surface)
+          const caps = [];
   
-      // 9. FRONT + BACK FACES (smooth surface)
+          function addCap(ri, facing) {
   
-      const caps = [];
+            const contour = rc[ri];
+            const off = profile[ri].off;
+            const base = vertices.length / 3;
   
-      function addCap(ri, facing) {
+            const U = contour.map(c => c.u);
+            const V2 = contour.map(c => c.v);
+            const N = contour.map(c => c.n);
   
-          const contour = rc[ri];
-          const off = profile[ri].off;
-          const base = vertices.length / 3;
-  
-          const U = contour.map(c => c.u);
-          const V = contour.map(c => c.v);
-          const N = contour.map(c => c.n);
-  
-          let tris = THREE.ShapeUtils.triangulateShape(
+            let tris = THREE.ShapeUtils.triangulateShape(
               contour.map(c => new THREE.Vector2(c.u, c.v)), []
-          );
+            );
   
-          // subdivide into many small triangles
-          for (let lv = 0; lv < capSubdivisions; lv++) {
+            // subdivide into many small triangles
+            for (let lv = 0; lv < capSubdivisions; lv++) {
               const mid = new Map(), nt = [];
   
               const gm = (a, b) => {
-                  const k = a < b ? a + '_' + b : b + '_' + a;
-                  if (mid.has(k)) return mid.get(k);
-                  const i = U.length;
-                  U.push((U[a] + U[b]) / 2);
-                  V.push((V[a] + V[b]) / 2);
-                  N.push(0);
-                  mid.set(k, i);
-                  return i;
+                const k = a < b ? a + '_' + b : b + '_' + a;
+                if (mid.has(k)) return mid.get(k);
+                const i = U.length;
+                U.push((U[a] + U[b]) / 2);
+                V2.push((V2[a] + V2[b]) / 2);
+                N.push(0);
+                mid.set(k, i);
+                return i;
               };
   
               tris.forEach(t => {
-                  const a = t[0], b = t[1], c = t[2];
-                  const ab = gm(a, b), bc = gm(b, c), ca = gm(c, a);
-                  nt.push([a, ab, ca], [ab, b, bc], [ca, bc, c], [ab, bc, ca]);
+                const a = t[0], b = t[1], c = t[2];
+                const ab = gm(a, b), bc = gm(b, c), ca = gm(c, a);
+                nt.push([a, ab, ca], [ab, b, bc], [ca, bc, c], [ab, bc, ca]);
               });
   
               tris = nt;
-          }
+            }
   
-          // one smooth surface through the outline
-          const f = tpsFit(
+            // one smooth surface through the outline
+            const f = tpsFit(
               contour.map(c => c.u),
               contour.map(c => c.v),
               contour.map(c => c.n)
-          );
+            );
   
-          for (let i = 0; i < U.length; i++) N[i] = f(U[i], V[i]);
+            for (let i = 0; i < U.length; i++) N[i] = f(U[i], V2[i]);
   
-          caps.push({ base, ri });
+            caps.push({ base, ri });
   
-          for (let i = 0; i < U.length; i++) {
-              const w = toWorld({ u: U[i], v: V[i], n: N[i] }, off);
+            for (let i = 0; i < U.length; i++) {
+              const w = toWorld({ u: U[i], v: V2[i], n: N[i] }, off);
               vertices.push(w.x, w.y, w.z);
-          }
+            }
   
-          tris.forEach(t => {
+            tris.forEach(t => {
               const a = t[0], b = t[1], c = t[2];
-              const cr = (U[b] - U[a]) * (V[c] - V[a]) - (V[b] - V[a]) * (U[c] - U[a]);
+              const cr = (U[b] - U[a]) * (V2[c] - V2[a]) - (V2[b] - V2[a]) * (U[c] - U[a]);
   
               if (cr * facing >= 0) indices.push(base + a, base + b, base + c);
               else                  indices.push(base + a, base + c, base + b);
-          });
-      }
+            });
+          }
   
-      addCap(0, +1);            // front
-      addCap(rings - 1, -1);    // back
+          addCap(0, +1);            // front
+          addCap(rings - 1, -1);    // back
   
+          // 10. GEOMETRY
+          const geometry = new THREE.BufferGeometry();
   
-      // 10. GEOMETRY
+          geometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(vertices, 3)
+          );
   
-      const geometry = new THREE.BufferGeometry();
+          geometry.setIndex(indices);
+          geometry.computeVertexNormals();
   
-      geometry.setAttribute(
-          'position',
-          new THREE.Float32BufferAttribute(vertices, 3)
-      );
+          // blend face edge normals with the bevel -> no visible seam line
+          const nrm = geometry.attributes.normal.array;
   
-      geometry.setIndex(indices);
-      geometry.computeVertexNormals();
-  
-      // blend face edge normals with the bevel -> no visible seam line
-      const nrm = geometry.attributes.normal.array;
-  
-      caps.forEach(c => {
-          for (let i = 0; i < count; i++) {
+          caps.forEach(c => {
+            for (let i = 0; i < count; i++) {
               const a = (c.base + i) * 3;
               const b = (c.ri * count + i) * 3;
   
@@ -1192,61 +1298,57 @@
               nrm[a] = nrm[b] = nx / l;
               nrm[a + 1] = nrm[b + 1] = ny / l;
               nrm[a + 2] = nrm[b + 2] = nz / l;
-          }
-      });
+            }
+          });
   
-      geometry.attributes.normal.needsUpdate = true;
+          geometry.attributes.normal.needsUpdate = true;
   
+          // 11. MESH
+          const meshMaterial = material.clone();
+          meshMaterial.side = THREE.DoubleSide;
   
-      // 11. MESH
+          const mesh = new THREE.Mesh(geometry, meshMaterial);
   
-      const meshMaterial = material.clone();
-      meshMaterial.side = THREE.DoubleSide;
+          mesh.position.set(x, y, z);
+          mesh.name = name;
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
   
-      const mesh = new THREE.Mesh(geometry, meshMaterial);
+          sofa.add(mesh);
   
-      mesh.position.set(x, y, z);
-      mesh.name = name;
-      mesh.castShadow = true;
-      mesh.receiveShadow = true;
+          return mesh;
+        }
   
-      sofa.add(mesh);
+        createSofaXYZShape(
+          'sofa-middle-backsupport',
   
-      return mesh;
-  }
+          2.23, 0.01, 5.17,
   
+          [
+            [2.45, 0, -0.67],
+            [2.45, 0.5, -0.67],
+            [3.3, 0.73, -1],
+            [3.2, 0.5, -2.21],
+            [3.2, 0, -2.21],
+            [3.2, 0, -1],
+            [2.46, 0, -0.669]
+          ],
   
-  // =====================================================
-  // YOUR CALL (unchanged)
-  // =====================================================
+          mats.sofa,
   
-  createSofaXYZShape(
-      'sofa-middle-backsupport',
+          0.25
+        );
   
-      2.23, 0.01, 5.17,
-  
-      [
-          [2.45, 0, -0.67],
-          [2.45, 0.5, -0.67],
-          [3.3, 0.73, -1],
-          [3.2, 0.5, -2.21],
-          [3.2, 0, -2.21],
-          [3.2, 0, -1],
-          [2.46, 0, -0.669],
-      ],
-  
-      mats.sofa,
-  
-      0.25
-  );
-    createLoungeChair({
-          material: mats.armchair,     
-          x: 2.8, y: 0, z: 4.3,       
-           rotationY:  (Math.PI / -1.45),         
-          scale: 0.69,                
+        // ================= LOUNGE CHAIR =================
+        createLoungeChair({
+          material: mats.armchair,
+          x: 2.8, y: 0, z: 4.3,
+          rotationY: (Math.PI / -1.45),
+          scale: 0.69,
           parent: root
-      });
-  }
+        });
+      }
+  
       return root;
     };
   })((window.VEYRA = window.VEYRA || {}));

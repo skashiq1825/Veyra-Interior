@@ -1,150 +1,397 @@
 (function (V) {
   'use strict';
-  const U = V.utils;
 
-  /**
-   * IMPORTANT — what the GLB contains:  geometry + materials only.
-   * SimLab/SketchUp exported the *placeholders* of the render lights (empty nodes called
-   * "Rectangle Light ceiling", "IES Light", …) but no light type / intensity / colour, so every
-   * light here is a real Three.js light that we PLACE from the model:
-   *   - ceiling downlights  <- the "Spotlight*" fixtures (positions read from their meshes)
-   *   - LED cove            <- the "Emissive WALL" strip
-   *   - table lamp          <- material "centre table lamp"
-   *   - bubble floor lamp   <- the "Enscape.PointLight" / "SDT-2800K" glow meshes
-   *   - wall sconce         <- "IES Light" placeholder (position in config)
-   * The glowing meshes are additionally driven through emissive intensity.
-   *
-   * Two independent groups:   ARTIFICIAL (all of the above)   and   DAYLIGHT (sun + sky + IBL).
-   */
-  V.createLighting = function createLighting({ scene, renderer, root, info, config, quality }) {
-    const L = config.lighting, A = L.artificial;
-    const art = new THREE.Group(); art.name = 'veyra-artificial';
-    scene.add(art);
-    const artLights = [];            // { light, base }
-    const warm = new THREE.Color(A.color);
+  V.createLighting = function createLighting({
+      scene,
+      root,
+      info,
+      renderer,
+      quality
+  }) {
 
-    function addLight(light, base) { art.add(light); artLights.push({ light, base }); return light; }
+      if (!scene) {
+          throw new Error('Lighting requires a THREE.Scene');
+      }
 
-    // ---- DAYLIGHT --------------------------------------------------------------------------
-    const sun = new THREE.DirectionalLight(L.sun.color, L.sun.intensity);
-    const dir = new THREE.Vector3(...L.sun.direction).normalize();
-    const sTarget = new THREE.Vector3(...L.sun.target);
-    sun.position.copy(sTarget).addScaledVector(dir, L.sun.distance);
-    sun.target.position.copy(sTarget);
-    sun.castShadow = true;
-    sun.shadow.mapSize.set(quality.shadowMap, quality.shadowMap);
-    const b = L.sun.shadowBounds;
-    Object.assign(sun.shadow.camera, { left: -b, right: b, top: b, bottom: -b, near: 1, far: L.sun.distance * 2 });
-    sun.shadow.camera.updateProjectionMatrix();
-    sun.shadow.bias = -0.0005; sun.shadow.normalBias = 0.02; sun.shadow.radius = 3;
-    scene.add(sun, sun.target);
+      // ==========================================
+      // 1. AMBIENT LIGHT
+      // ==========================================
 
-    const sky = new THREE.HemisphereLight(L.sky.sky, L.sky.ground, L.sky.intensity);
-    scene.add(sky);
+      const ambientLight = new THREE.AmbientLight(
+          0xffffff,
+          0.8
+      );
 
-    // ---- ARTIFICIAL: downlights from the model ----------------------------------------------
-    const spots = [];
-    root.traverse((o) => {
-      if (!/^spotlight\d*$/.test(U.norm(o.name))) return;
-      const bx = new THREE.Box3().setFromObject(o);
-      if (bx.isEmpty()) return;
-      const c = bx.getCenter(new THREE.Vector3()); c.y = bx.min.y;
-      if (!spots.some((p) => p.distanceTo(c) < 0.35)) spots.push(c);        // merge doubled fixtures
-    });
-    const seat = new THREE.Vector3(4.0, 2.8, 3.6);
-    spots.sort((p, q) => p.distanceTo(seat) - q.distanceTo(seat));
-    const S = A.spot;
-    spots.slice(0, quality.maxSpots).forEach((p) => {
-      const sp = new THREE.SpotLight(A.color, S.intensity, 0, S.angle, S.penumbra, 2);
-      sp.position.set(p.x, p.y - S.drop, p.z);
-      sp.target.position.set(p.x, 0, p.z);
-      art.add(sp.target);
-      addLight(sp, S.intensity);
-    });
+      scene.add(ambientLight);
 
-    // ---- table lamp, bubble lamp, cove ------------------------------------------------------
-    // union of the world boxes of all visible meshes using a material (optionally filtered by their box)
-    const boxOfMaterial = (re, accept) => {
-      const bx = new THREE.Box3(), tmp = new THREE.Box3(); let found = false;
-      root.traverse((o) => {
-        if (!o.isMesh || !o.visible || !U.materialsOf(o).some((m) => re.test(m.name))) return;
-        U.meshBox(o, tmp);
-        if (accept && !accept(tmp)) return;
-        bx.union(tmp); found = true;
-      });
-      return found ? bx : null;
-    };
-    const tl = boxOfMaterial(/^centre table lamp$/i);
-    if (tl) {
-      const c = tl.getCenter(new THREE.Vector3()); c.y += 0.04;
-      const p = new THREE.PointLight(A.color, A.tableLamp.intensity, A.tableLamp.distance, 2); p.position.copy(c);
-      addLight(p, A.tableLamp.intensity);
-    }
-    const bl = boxOfMaterial(/sdt-2800/i);
-    if (bl) {
-      const c = bl.getCenter(new THREE.Vector3());
-      const p = new THREE.PointLight(A.color, A.bubbleLamp.intensity, A.bubbleLamp.distance, 2); p.position.copy(c);
-      addLight(p, A.bubbleLamp.intensity);
-    }
-    // the same material is also used on a vertical wall strip -> only take the thin ceiling-level mesh
-    const cv = boxOfMaterial(/^emissive wall$/i, (b) => b.min.y > 2.5 && b.max.y - b.min.y < 0.1);
-    if (cv) {
-      const y = cv.min.y - A.cove.below, i = A.cove.inset, c = cv.getCenter(new THREE.Vector3());
-      const spots3 = [
-        [cv.min.x + i, y, c.z], [cv.max.x - i, y, c.z], [c.x, y, cv.max.z - i]    // left wall, right wall, window wall
-      ].slice(0, quality.coves);
-      spots3.forEach((pp) => {
-        const p = new THREE.PointLight(A.color, A.cove.intensity, A.cove.distance, 2); p.position.set(...pp);
-        addLight(p, A.cove.intensity);
-      });
-    }
-    // wall sconce above the painting
-    {
-      const s = A.sconce;
-      const sp = new THREE.SpotLight(A.color, s.intensity, 4, s.angle, s.penumbra, 2);
-      sp.position.set(...s.position); sp.target.position.set(...s.aim); art.add(sp.target);
-      addLight(sp, s.intensity);
-    }
 
-    // ---- state + animation -----------------------------------------------------------------
-    const state = { art: 1, day: 1, artMul: 1 };
-    const bgDay = new THREE.Color(L.background.day), bgNight = new THREE.Color(L.background.night);
-    const bg = new THREE.Color();
-    let tweenArt = null, tweenDay = null;
+      // ==========================================
+      // 2. MAIN DIRECTIONAL LIGHT
+      // ==========================================
 
-    function apply() {
-      artLights.forEach(({ light, base }) => (light.intensity = base * state.art * state.artMul));
-      info.emissive.forEach(({ key, material }) => (material.emissiveIntensity = (A.emissive[key] || 1) * state.art));
-      sun.intensity = L.sun.intensity * state.day;
-      sky.intensity = L.sky.intensity * state.day;
-      const env = U.lerp(L.env.night, L.env.day, state.day);
-      info.envMaterials.forEach((m) => (m.envMapIntensity = env * (m.userData.envBase || 1)));
-      renderer.toneMappingExposure = U.lerp(L.exposure.night, L.exposure.day, state.day);
-      bg.copy(bgNight).lerp(bgDay, state.day);
-      renderer.setClearColor(bg, 1);
-    }
-    function tween(key, to, immediate, slot) {
-      if (window.gsap && !immediate && !U.prefersReducedMotion()) {
-        const prev = slot === 'a' ? tweenArt : tweenDay;
-        if (prev) prev.kill();
-        const t = gsap.to(state, { [key]: to, duration: 1.1, ease: 'power2.inOut', onUpdate: apply });
-        if (slot === 'a') tweenArt = t; else tweenDay = t;
-      } else { state[key] = to; apply(); }
-    }
-    apply();
+      const directionalLight = new THREE.DirectionalLight(
+          0xeac576,
+          7
+      );
 
-    return {
-      sun, sky, artLights, state, apply,
-      setArtificial(on, immediate) { tween('art', on ? 1 : 0, immediate, 'a'); },
-      setDaylight(on, immediate) { tween('day', on ? 1 : 0, immediate, 'd'); },
-      isArtificialOn: () => state.art > 0.5,
-      isDaylightOn: () => state.day > 0.5,
-      summary: () => ({
-        downlights: artLights.filter((l) => l.light.isSpotLight).length - 1,
-        pointLights: artLights.filter((l) => l.light.isPointLight).length,
-        emissiveMaterials: info.emissive.length,
-        spotsFoundInModel: spots.length
-      })
-    };
+      directionalLight.position.set(
+          1.8,
+          3.5,
+          7.5
+      );
+
+      directionalLight.target.position.set(
+               2.8,
+          0.05,
+        3.5
+      );
+
+      directionalLight.castShadow = true;
+
+      directionalLight.shadow.mapSize.width = 2048;
+      directionalLight.shadow.mapSize.height = 2048;
+
+      directionalLight.shadow.bias = -0.0001;
+
+      directionalLight.shadow.camera.left = -6;
+      directionalLight.shadow.camera.right = 6;
+      directionalLight.shadow.camera.top = 6;
+      directionalLight.shadow.camera.bottom = -6;
+
+      directionalLight.shadow.camera.near = 0.1;
+      directionalLight.shadow.camera.far = 30;
+
+      scene.add(directionalLight);
+      scene.add(directionalLight.target);
+
+
+      // ==========================================
+      // 3. POINT LIGHT
+      // ==========================================
+
+      const pointLight = new THREE.PointLight(
+          0xFFF7EB,
+          5,
+          5
+      );
+
+      pointLight.position.set(
+          3,
+          1.2,
+          2.38
+      );
+
+      scene.add(pointLight);
+
+
+      // ==========================================
+      // 4. SPOT LIGHT
+      // ==========================================
+
+      const spotLight = new THREE.SpotLight(
+          0xFFCB56,
+          50,
+          2,
+          Math.PI * 0.1,
+          1.4,
+          0.01
+      );
+
+      spotLight.position.set(
+        5.75, 2.65, 2.815
+      );
+
+      spotLight.target.position.set(
+        5.75, 0, 2.815
+      );
+
+      spotLight.castShadow = true;
+
+      scene.add(spotLight);
+      scene.add(spotLight.target);
+
+
+      // ==========================================
+      // 5. SECOND DIRECTIONAL LIGHT
+      // ==========================================
+
+      const directionalLightFace = new THREE.DirectionalLight(
+          0xFFCB3D,
+          3
+      );
+
+      directionalLightFace.position.set(
+        2.5,
+          3.5,
+          8.5
+      );
+
+      directionalLightFace.target.position.set(
+     
+            2.5,
+          0.2,
+          7.5
+      );
+
+      directionalLightFace.castShadow = true;
+
+      directionalLightFace.shadow.mapSize.width = 1048;
+      directionalLightFace.shadow.mapSize.height = 1048;
+
+      directionalLightFace.shadow.bias = -0.0001;
+
+      directionalLightFace.shadow.camera.left = -20;
+      directionalLightFace.shadow.camera.right = 20;
+      directionalLightFace.shadow.camera.top = 20;
+      directionalLightFace.shadow.camera.bottom = -20;
+
+      directionalLightFace.shadow.camera.near = 0.1;
+      directionalLightFace.shadow.camera.far = 100;
+
+      scene.add(directionalLightFace);
+      scene.add(directionalLightFace.target);
+
+
+      // ==========================================
+      // 6. LIGHT HELPERS
+      // ==========================================
+
+      const directionalHelper =
+          new THREE.DirectionalLightHelper(
+              directionalLight,
+              1,
+              0xffff00
+          );
+
+      const directionalFaceHelper =
+          new THREE.DirectionalLightHelper(
+              directionalLightFace,
+              1,
+              0xff8800
+          );
+
+      const spotHelper =
+          new THREE.SpotLightHelper(
+              spotLight,
+              0x00ff00
+          );
+
+      const pointHelper =
+          new THREE.PointLightHelper(
+              pointLight,
+              0.2,
+              0xff0000
+          );
+
+
+      // Add helpers to scene
+
+      scene.add(directionalHelper);
+      scene.add(directionalFaceHelper);
+      scene.add(spotHelper);
+      scene.add(pointHelper);
+
+
+      // ==========================================
+      // 7. HELPER VISIBILITY
+      // ==========================================
+
+      let helpersVisible = true;
+
+      function setHelpersVisible(visible) {
+
+          helpersVisible = visible;
+
+          directionalHelper.visible = visible;
+          directionalFaceHelper.visible = visible;
+          spotHelper.visible = visible;
+          pointHelper.visible = visible;
+      }
+
+
+      // ==========================================
+      // 8. UPDATE HELPERS
+      // ==========================================
+
+      function updateHelpers() {
+
+          directionalHelper.update();
+
+          directionalFaceHelper.update();
+
+          spotHelper.update();
+
+          pointHelper.update();
+      }
+
+
+      // ==========================================
+      // 9. LIGHT CONTROL
+      // ==========================================
+
+      const state = {
+
+          artificial: true,
+
+          daylight: true,
+
+          sofaLight: true,
+
+          helpers: true
+
+      };
+
+
+      function setArtificial(enabled) {
+
+          state.artificial = enabled;
+
+          spotLight.visible = enabled;
+      }
+
+
+      function setDaylight(enabled) {
+
+          state.daylight = enabled;
+
+          directionalLight.visible = enabled;
+
+          directionalLightFace.visible = enabled;
+      }
+
+
+      function setSofaLight(enabled) {
+
+          state.sofaLight = enabled;
+
+          pointLight.visible = enabled;
+      }
+
+
+      // ==========================================
+      // 10. SUMMARY
+      // ==========================================
+
+      function summary() {
+
+          return {
+
+              ambient: {
+                  intensity: ambientLight.intensity
+              },
+
+              directional: {
+                  intensity: directionalLight.intensity,
+                  position: directionalLight.position.toArray()
+              },
+
+              spot: {
+                  intensity: spotLight.intensity,
+                  position: spotLight.position.toArray()
+              },
+
+              point: {
+                  intensity: pointLight.intensity,
+                  position: pointLight.position.toArray()
+              },
+
+              directionalFace: {
+                  intensity: directionalLightFace.intensity,
+                  position: directionalLightFace.position.toArray()
+              },
+
+              helpersVisible: helpersVisible
+
+          };
+      }
+
+
+      // ==========================================
+      // 11. APPLY
+      // ==========================================
+
+      function apply() {
+
+          setArtificial(state.artificial);
+
+          setDaylight(state.daylight);
+
+          setSofaLight(state.sofaLight);
+
+          setHelpersVisible(state.helpers);
+
+          updateHelpers();
+      }
+
+
+      // ==========================================
+      // 12. DISPOSE
+      // ==========================================
+
+      function dispose() {
+
+          scene.remove(ambientLight);
+
+          scene.remove(directionalLight);
+          scene.remove(directionalLight.target);
+
+          scene.remove(pointLight);
+
+          scene.remove(spotLight);
+          scene.remove(spotLight.target);
+
+          scene.remove(directionalLightFace);
+          scene.remove(directionalLightFace.target);
+
+          scene.remove(directionalHelper);
+          scene.remove(directionalFaceHelper);
+          scene.remove(spotHelper);
+          scene.remove(pointHelper);
+      }
+
+
+      // ==========================================
+      // 13. RETURN
+      // ==========================================
+
+      return {
+
+          // Lights
+          ambientLight,
+          directionalLight,
+          directionalLightFace,
+          spotLight,
+          pointLight,
+
+          // Helpers
+          directionalHelper,
+          directionalFaceHelper,
+          spotHelper,
+          pointHelper,
+
+          // State
+          state,
+
+          // Functions
+          apply,
+          summary,
+          dispose,
+
+          updateHelpers,
+          setHelpersVisible,
+
+          setArtificial,
+          setDaylight,
+          setSofaLight,
+
+          isArtificialOn: () => state.artificial,
+
+          isDaylightOn: () => state.daylight,
+
+          isSofaLightOn: () => state.sofaLight
+
+      };
+
   };
-})((window.VEYRA = window.VEYRA || {}));
+
+})(window.VEYRA = window.VEYRA || {});
