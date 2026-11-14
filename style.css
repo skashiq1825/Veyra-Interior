@@ -2672,3 +2672,255 @@ html:not(.is-ready) [data-reveal] {
   }
 }
 
+@media (max-width:600px) {
+    
+.loading-name-box{
+    width: 100%;
+    height: 100%;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+    gap:25vw;
+    color: #f2ecdf;
+    font-family: italiana;
+    position: relative;
+}
+.loading-name-box h1 {
+    font-weight: 400;
+    font-size: clamp(2.2rem, 10vw, 3rem);
+}
+
+.namebox-left{
+    width: 100%;
+    /* background-color: darkblue; */
+    /* position: absolute; */
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    height: 15vh;
+    align-items: center;
+    line-height: 0;
+
+
+}
+.namebox-left span{
+ 
+display: inline-block;
+
+}
+.namebox-right span{
+ 
+    display: inline-block;
+    
+    }
+    
+.namebox-right{
+    width: 100%;
+    /* background-color: darkblue; */
+    justify-content: center;
+    display: flex;
+    height: 15vh;
+    align-items: center;
+    line-height: 0;
+    overflow: hidden;
+
+
+}
+
+.popup-image-holder {
+    width: 35vw;
+    height: 35vw;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+   
+    transform: translate(-50%, -50%)scale(1);
+
+    overflow: hidden;
+
+    /* TOP IMAGE AS HOLDER BACKGROUND */
+    background-image: url('./assets/res1bed/Bedroom\(4\).webp');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform-origin: center center;
+    
+}
+
+.information{
+    width: 100%;
+    height: 110vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: red; */
+    overflow: hidden;
+}
+
+.information p{
+    width: 90%;
+    font-family:renade;
+    font-size: clamp(1.2rem, 5vw, 2rem);
+    opacity: 0.7;
+    /* background-color: rgba(255, 251, 251, 0.068); */
+    color: #ffffff;
+    mix-blend-mode: difference;
+    text-align:center;
+    font-weight: 400;
+    /* letter-spacing: 1px; */
+    z-index: 3;
+}
+.infopageimage{
+    position: absolute;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+}
+
+.infopageimage img{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150%;
+    height: 160%;
+    object-fit: cover;
+    display: block;
+    will-change: transform;
+
+}
+.ip2i1 {
+    width: clamp(120px, 30vw, 160px);
+    height: clamp(120px, 32vw, 160px);
+    top: 25%;
+    right: 14%;
+}
+
+.ip2i2 {
+    width: clamp(105px, 28vw, 140px);
+    height: clamp(145px, 40vw, 190px);
+    top: 52%;
+    left: 12%;
+    display: none;
+}
+
+.ip2i3 {
+    width: clamp(125px, 28vw, 140px);
+    height: clamp(140px, 38vw, 180px);
+    top: 74%;
+    right: 46%;
+}
+
+.about-studio{
+    width: 100%;
+    height: 200vh;
+    /* background-color: #f9f4ee; */
+    position: relative;
+}
+.studio-head{
+    width: 100%;
+    height: 75vh;
+    background-color: #87857C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 4vw;
+    padding: 4vw;
+    position: relative;
+    overflow: hidden;
+}
+.studio-head h2{
+    font-family: xanh;
+    font-size: 2.5vw;
+    /* line-height: 3vw; */
+    color: #f9f4ee;
+    font-weight: 500;
+    text-align: center;
+    width: 70%;
+    z-index: 2;
+
+}
+.studio-head h5{
+    font-family: renade;
+    font-size: 1.2vw;
+    /* line-height: 3vw; */
+    color: #f9f4ee;
+    font-weight: 300;
+    text-align: center;
+    width: 70%;
+    letter-spacing: 1px;
+
+}
+.studioheadfooter{
+    font-family:renade;
+    font-size: 1.2vw;
+    color: #f9f4ee;
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translate(-50%,0%);
+    font-weight: 100;
+}
+.cursivebranding {
+    /* background-color: teal; */
+    width: fit-content;
+    height: 20vh;
+    font-family: mld;
+    font-size: clamp(5.2rem, 20vw, 7rem);
+    
+    color: #D0C99D;
+    font-weight: 20;
+    white-space: nowrap;
+    line-height: 0;
+    position: absolute;
+    top: 40%;
+    left: 0%;
+    transform: translate(0%,-50%);
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    /* justify-content: center; */
+    gap: 0vw;
+    padding: 0vw 2vw;
+    animation-name: run;
+    animation-duration: 95s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.cursivebranding h1 {
+    font-weight: 50;
+}
+@keyframes run {
+    0%{
+        transform: translateX(0%);
+    }
+    100%{
+        transform: translateX(-50%);
+    }
+}
+
+.wave {
+    width: 100%;
+    height: 20vh;
+    background-color: #87857C;
+    
+    margin-top: -1px;
+    line-height: 0;
+}
+
+.wave svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+}
