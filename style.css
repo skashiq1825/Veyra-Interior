@@ -2821,13 +2821,13 @@ display: inline-block;
 
 .about-studio{
     width: 100%;
-    height: 100vh;
+    height: 65vh;
     /* background-color: #f9f4ee; */
     position: relative;
 }
 .studio-head{
     width: 100%;
-    height: 75vh;
+    height: 45vh;
     background-color: #87857C;
     display: flex;
     flex-direction: column;
