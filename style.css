@@ -2873,7 +2873,7 @@ display: inline-block;
 }
 .studio-head h2{
     font-family: xanh;
-    font-size: clamp(1.3rem, 4.7vw, 2.1rem);
+    font-size: clamp(1.6rem, 5vw, 2.5rem);
     /* line-height: 3vw; */
     color: #f9f4ee;
     font-weight: 500;
@@ -2902,7 +2902,7 @@ display: inline-block;
     align-items: center;
     justify-content: center;
     font-family:xanh;
-    font-size: clamp(1rem, 0.8vw, 1.2rem);
+    font-size: clamp(1.2rem, 1vw, 1.4rem);
     color: #f9f4ee;
     
     font-weight: 100;
