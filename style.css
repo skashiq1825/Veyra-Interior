@@ -857,7 +857,8 @@ justify-content: center;
     font-family: xanh;
     font-size: 2.4vw;
     font-weight: 580;
-    color: #b9b9b85d;
+  color:" #534638";
+   
     letter-spacing: 2px;
     text-transform:uppercase;
    
@@ -3089,6 +3090,18 @@ display: inline-block;
     text-transform:uppercase;
 
 }
+.projectoverviewdescription-box h2{
+    font-size: clamp(1rem, 5.2vw, 1.8rem);
+    width: 85%;
+
+    
+}
+.select-box h4{
+    font-size: clamp(1rem, 5.2vw, 1.8rem);
+  
+
+
+}
 .poimage1 {
     width: clamp(12.5rem, 40vw, 18.75rem);
     height: clamp(17.5rem, 56vw, 23.75rem);
@@ -3107,11 +3120,13 @@ display: inline-block;
 .poimage4 {
     width: clamp(10rem, 32vw, 16.25rem);
     height: clamp(13.125rem, 42vw, 20rem);
+    top: 44%;
 }
 
 .poimage5 {
     width: clamp(14.375rem, 46vw, 21.25rem);
     height: clamp(16.25rem, 52vw, 22.5rem);
+    top: 60%;
 }
 
 }

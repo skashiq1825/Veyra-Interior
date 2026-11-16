@@ -597,6 +597,8 @@ projectoverviewtimeline.to(".pos2", {
   opacity: 1,
   stagger: "0.2",
   duration: 1,
+  color: "#342617",
+
 
 })
 projectoverviewtimeline.from(".select-box h4", {
