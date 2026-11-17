@@ -283,7 +283,8 @@ function firstAnimation() {
     namesideanimationtimeline.from(".namebox-left span", {
       y: 90,
       stagger: 0.05,
-      duration: 0.3
+      duration: 0.3,
+      delay:1
     });
     namesideanimationtimeline.from(".namebox-right span", {
       y: 90,
