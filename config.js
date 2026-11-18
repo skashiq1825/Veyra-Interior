@@ -16,11 +16,7 @@
      * Your optimised furniture files (put them next to index.html). Leave url empty to keep the grey placeholder blocks.
      * rotationY (radians) turns the model if it faces the wrong way; fill < 1 makes it a bit smaller than the placeholder.
      */
-    furniture: {
-      sofa:     { url: '', placeholder: 'placeholder-sofa',     rotationY: 0 },
-      armchair: { url: '', placeholder: 'placeholder-armchair', rotationY: 0 },
-      table:    { url: '', placeholder: 'placeholder-table',    rotationY: 0 }
-    },
+  
 
     /** Optional image textures (small WebP/JPG). Empty = generated in code. Keys: plaster, floor, wood, stone, rug, painting, leaf */
     textures: {},
@@ -105,7 +101,7 @@
     },
 
     quality: {
-      desktop: { maxPixelRatio: 2.0, shadowMap: 2048, maxSpots: 12, coves: 3, curtainRows: 18 },
+      desktop: { maxPixelRatio: 1.5, shadowMap: 2048, maxSpots: 12, coves: 3, curtainRows: 18 },
       mobile:  { maxPixelRatio: 1.5, shadowMap: 1024, maxSpots: 4,  coves: 2, curtainRows: 10 }
     }
   };
