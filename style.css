@@ -1,22 +1,31 @@
 @font-face {
-    font-family:italiana;
+    font-family: italiana;
     src: url(./fonts/Italiana-Regular.ttf);
+    font-display: swap;
 }
+
 @font-face {
-    font-family:renade;
+    font-family: renade;
     src: url(./fonts/Ranade-Medium.otf);
+    font-display: swap;
 }
+
 @font-face {
-    font-family:excon;
+    font-family: excon;
     src: url(./fonts/Excon-Medium.otf);
+    font-display: swap;
 }
+
 @font-face {
-    font-family:xanh;
+    font-family: xanh;
     src: url(./fonts/XanhMono-Regular.ttf);
+    font-display: swap;
 }
+
 @font-face {
-    font-family:mld;
+    font-family: mld;
     src: url(./fonts/MonsieurLaDoulaise-Regular.ttf);
+    font-display: swap;
 }
 * {
     margin: 0;
