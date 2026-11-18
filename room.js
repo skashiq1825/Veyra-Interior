@@ -439,56 +439,56 @@
 
     // ================= COURTYARD PLANTING (disabled — remove the /* and */ lines to turn it back on) =================
     
-    {
-         const gr = new THREE.Group();
-      gr.name = 'courtyard-plants';
-      root.add(gr);
+    // {
+    //      const gr = new THREE.Group();
+    //   gr.name = 'courtyard-plants';
+    //   root.add(gr);
 
-      // Create leaf geometry only once and reuse it
-      const leafGeometry = new THREE.PlaneGeometry(0.55, 1.8, 1, 8);
-      const leafPositions = leafGeometry.attributes.position;
+    //   // Create leaf geometry only once and reuse it
+    //   const leafGeometry = new THREE.PlaneGeometry(0.55, 1.8, 1, 8);
+    //   const leafPositions = leafGeometry.attributes.position;
 
-      for (let k = 0; k < leafPositions.count; k++) {
-        const t = (leafPositions.getY(k) + 0.9) / 1.8;
-        leafPositions.setZ(k, -0.25 * t * t);
-      }
+    //   for (let k = 0; k < leafPositions.count; k++) {
+    //     const t = (leafPositions.getY(k) + 0.9) / 1.8;
+    //     leafPositions.setZ(k, -0.25 * t * t);
+    //   }
 
-      leafGeometry.translate(0, 0.9, 0);
-      leafGeometry.computeVertexNormals();
+    //   leafGeometry.translate(0, 0.9, 0);
+    //   leafGeometry.computeVertexNormals();
 
-      const palm = (x, z, scale, leaves) => {
-        const trunk = new THREE.Mesh(
-          new THREE.CylinderGeometry(0.05, 0.08, 1.0, 10),
-          mats.trunk
-        );
+    //   const palm = (x, z, scale, leaves) => {
+    //     const trunk = new THREE.Mesh(
+    //       new THREE.CylinderGeometry(0.05, 0.08, 1.0, 10),
+    //       mats.trunk
+    //     );
 
-        trunk.position.set(x, 0.5 * scale, z);
-        trunk.scale.setScalar(scale);
-        add(trunk, 'trunk', gr);
+    //     trunk.position.set(x, 0.5 * scale, z);
+    //     trunk.scale.setScalar(scale);
+    //     add(trunk, 'trunk', gr);
 
-        for (let i = 0; i < leaves; i++) {
-          const leaf = new THREE.Mesh(
-            leafGeometry,
-            mats['Licuala_Grandis_Leaf2']
-          );
+    //     for (let i = 0; i < leaves; i++) {
+    //       const leaf = new THREE.Mesh(
+    //         leafGeometry,
+    //         mats['Licuala_Grandis_Leaf2']
+    //       );
 
-          leaf.position.set(x, 0.95 * scale, z);
-          leaf.rotation.order = 'YXZ';
-          leaf.rotation.y = i * 2.399963;
-          leaf.rotation.x = -(0.25 + (i % 5) * 0.16);
-          leaf.scale.setScalar(scale * (0.8 + (i % 3) * 0.12));
+    //       leaf.position.set(x, 0.95 * scale, z);
+    //       leaf.rotation.order = 'YXZ';
+    //       leaf.rotation.y = i * 2.399963;
+    //       leaf.rotation.x = -(0.25 + (i % 5) * 0.16);
+    //       leaf.scale.setScalar(scale * (0.8 + (i % 3) * 0.12));
 
-          add(leaf, 'leaf', gr);
+    //       add(leaf, 'leaf', gr);
         
       
-        }
-      };
-      palm(2.15, 7.8, 1, 14); palm(1.0, 7.4, 0.55, 8); palm(3.9, 7.6, 0.7, 9);
-      const rock = mats['Beauford Flagstone Natural Stone Flooring'];
-      [[1.5, 7.2, 0.18], [3.3, 7.2, 0.14], [3.6, 8.2, 0.2], [0.8, 8.3, 0.12], [2.6, 8.4, 0.16]].forEach(([x, z, r]) => {
-        const m = new THREE.Mesh(new THREE.DodecahedronGeometry(r, 1), rock); m.position.set(x, r * 0.55, z); m.scale.y = 0.65; add(m, 'rock', gr);
-      });
-    }
+    //     }
+    //   };
+    //   palm(2.15, 7.8, 1, 14); palm(1.0, 7.4, 0.55, 8); palm(3.9, 7.6, 0.7, 9);
+    //   const rock = mats['Beauford Flagstone Natural Stone Flooring'];
+    //   [[1.5, 7.2, 0.18], [3.3, 7.2, 0.14], [3.6, 8.2, 0.2], [0.8, 8.3, 0.12], [2.6, 8.4, 0.16]].forEach(([x, z, r]) => {
+    //     const m = new THREE.Mesh(new THREE.DodecahedronGeometry(r, 1), rock); m.position.set(x, r * 0.55, z); m.scale.y = 0.65; add(m, 'rock', gr);
+    //   });
+    // }
     
 
   
