@@ -25,11 +25,7 @@
     /** Optional image textures (small WebP/JPG). Empty = generated in code. Keys: plaster, floor, wood, stone, rug, painting, leaf */
     textures: {},
 
-    model: {
-      url: 'models/veyra-room.glb',     // optimised copy of your GLB (see README)
-      embeddedId: 'veyra-glb-b64',      // only used by the single-file preview build
-      approxBytes: 8.8e6                // used for the progress bar when the server sends no length
-    },
+    
 
     room: {
       // The SketchUp export contains the front wall (z ≈ 0–0.23). The reference render
