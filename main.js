@@ -152,6 +152,8 @@
         // Error handling bina loader ke console ya fallback ke through
       }
     }
-    boot();
+  window.requestAnimationFrame(() => {
+      setTimeout(boot, 50);
+    });
   });
 })((window.VEYRA = window.VEYRA || {}));
