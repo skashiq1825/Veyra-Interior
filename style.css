@@ -74,7 +74,7 @@ body {
     height: 90vh;
     background-position: center;
     background-size: cover;
-    background-image: url(./assets/heroimg.jpeg);
+    /* background-image: url(./assets/heroimg.jpeg); */
     background-color: rgb(81, 80, 80);
     color: white;
     

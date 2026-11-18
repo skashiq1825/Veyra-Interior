@@ -247,11 +247,11 @@
 
     // floor  (name must contain "Dunstone" so material.js makes it glossy)
     mat('Dunstone floor', { map: loadTex('Dunstone___Contract__limestone_stone_effect_ceramic___Ceramiche_Keope.jpg', 2, 2) });
-    mat('ground floor', { map: loadTex('_56_ground_texture-seamless.jpg', 1, 1), roughness: 0.9 });
+    mat('ground floor', { map: loadTex('_56_ground_texture-seamless.webp', 1, 1), roughness: 0.9 });
 
     // rug  (centre must be set, otherwise the rotation drags the image sideways)
     {
-      const rugTex = loadTex('rug.png', 1, 1);
+      const rugTex = loadTex('rug.webp', 1, 1);
       rugTex.center.set(0.5, 0.5);
       rugTex.rotation = Math.PI / -2;
       mat('rug', { map: rugTex, roughness: 1 });
