@@ -38,7 +38,7 @@ body {
 #main {
     width: 100%;
     position: relative;
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
 
     height: 2000vh;
     overflow: hidden;
@@ -69,7 +69,7 @@ body {
     width: 100%;
     height: 100vh;
     z-index: 2;
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -582,7 +582,7 @@ nav {
     font-family: xanh;
     font-size: 2.5vw;
     /* line-height: 3vw; */
-    color: #f9f4ee;
+    color: #EFE6DD;
     font-weight: 500;
     text-align: center;
     width: 70%;
@@ -594,7 +594,7 @@ nav {
     font-family: renade;
     font-size: 1.2vw;
     /* line-height: 3vw; */
-    color: #f9f4ee;
+    color: #EFE6DD;
     font-weight: 300;
     text-align: center;
     width: 70%;
@@ -605,7 +605,7 @@ nav {
 .studioheadfooter {
     font-family: renade;
     font-size: 1.2vw;
-    color: #f9f4ee;
+    color: #EFE6DD;
     width: 100%;
     height: 25vh;
     display: flex;
@@ -808,7 +808,7 @@ nav {
     font-family: xanh;
     font-size: 1.4vw;
     /* color: #4c4a35; */
-    color: #f9f4ee;
+    color: #EFE6DD;
 
 }
 
@@ -1114,7 +1114,7 @@ nav {
     width: 100%;
     height: 100%;
     /* background-color: rgb(155, 59, 59); */
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
 
     position: absolute;
     bottom: 0%;
@@ -1131,7 +1131,7 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
     padding: 1vw;
     flex-direction: column;
 
@@ -1229,7 +1229,7 @@ nav {
     width: 14vw;
     height: 10vw;
     /* background-color: red; */
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
     position: absolute;
     top: 0%;
     left: 102%;
@@ -1303,7 +1303,7 @@ nav {
     font-family: xanh;
     font-size: 1.5vw;
     background-color: #84603c;
-    color: #f9f4ee;
+    color: #EFE6DD;
 }
 
 .viewall h4 {
@@ -1314,7 +1314,7 @@ nav {
     width: 100%;
     height: 100vh;
     /* background-color: blue; */
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
     position: relative;
     display: flex;
     
@@ -1630,7 +1630,7 @@ nav {
     justify-content: center;
     font-family: xanh;
     font-size: 0.9vw;
-    color: #f9f4ee;
+    color: #EFE6DD;
     cursor: pointer;
 }
 
@@ -1936,7 +1936,7 @@ nav {
 .slimboxlr {
     width: 15vh;
     height: 100%;
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
 
 }
 
@@ -1957,7 +1957,7 @@ nav {
 .slimboxtb {
     width: 100%;
     height: 15vh;
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -2330,10 +2330,10 @@ nav {
 
 
 
-/* VEYRA INTERIOR — hero. Palette: ivory #F9F4EE · tan #9C8166 · olive #5D5B4F */
+/* VEYRA INTERIOR — hero. Palette: ivory #EFE6DD · tan #9C8166 · olive #5D5B4F */
 
 :root {
-    --ivory: #F9F4EE;
+    --ivory: #EFE6DD;
     --tan: #f4e4d5;
     --olive: #5D5B4F;
     --ink: #2a2520;
@@ -2409,7 +2409,7 @@ button {
     /* height: 100svh; */
     /* min-height: 560px; */
     overflow: hidden;
-    background: #F9F4EE;
+    background: #EFE6DD;
     color: var(--ivory);
 }
 
@@ -3021,7 +3021,7 @@ html:not(.is-ready) [data-reveal] {
         font-family: xanh;
         font-size: clamp(1.4rem, 4.8vw, 2.2rem);
         /* line-height: 3vw; */
-        color: #f9f4ee;
+        color: #EFE6DD;
         font-weight: 500;
         /* text-align: center; */
         width: 95%;
@@ -3034,7 +3034,7 @@ html:not(.is-ready) [data-reveal] {
         font-size: clamp(0.9rem, 0.8vw, 1.2rem);
 
         /* line-height: 3vw; */
-        color: #f9f4ee;
+        color: #EFE6DD;
         font-weight: 300;
         text-align: center;
         width: 70%;
@@ -3051,7 +3051,7 @@ html:not(.is-ready) [data-reveal] {
         justify-content: center;
         font-family: xanh;
         font-size: clamp(1.2rem, 1vw, 1.4rem);
-        color: #f9f4ee;
+        color: #EFE6DD;
 
         font-weight: 100;
         text-align: center;
@@ -3224,6 +3224,7 @@ html:not(.is-ready) [data-reveal] {
         background-size: cover;
         background-image: url(./assets/office/reception.webp);
         z-index: 2;
+      
     }
 
     .pro3 {
@@ -3249,7 +3250,7 @@ html:not(.is-ready) [data-reveal] {
         font-weight: 580;
         color: #b9b9b85d;
         letter-spacing: 2px;
-        text-transform: uppercase;
+        text-transform:lowercase;
 
     }
 
@@ -3371,7 +3372,7 @@ html:not(.is-ready) [data-reveal] {
         font-family: xanh;
         font-size: clamp(0.7rem, 1.8vw, 0.9rem);
         text-align: center;
-        color: #f9f4ee;
+        color: #EFE6DD;
         cursor: pointer;
         padding: 1vw;
         margin-top: 1vw;
@@ -3466,7 +3467,7 @@ html:not(.is-ready) [data-reveal] {
     width: 100%;
     height: 100vh;
     /* background-color: blue; */
-    background-color: #f9f4ee;
+    background-color: #EFE6DD;
     position: relative;
     display: flex;
     flex-direction: column-reverse;
