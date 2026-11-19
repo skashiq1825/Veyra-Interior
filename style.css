@@ -882,7 +882,7 @@ nav {
 
 .page-project-overview {
     width: 100%;
-    height: 270vh;
+    height: 330vh;
     /* background-color: red; */
     position: relative;
     /* perspective: 1000px; 
@@ -895,7 +895,7 @@ nav {
 .projectoverviewdescription-box {
     width: 100%;
     height: 100vh;
-    /* background-color: rgba(255, 255, 0, 0.428); */
+    /* background-color: rgb(255, 255, 0); */
     position: absolute;
     top: 0%;
     display: flex;
@@ -918,7 +918,7 @@ nav {
     font-family: xanh;
     font-size: 2.4vw;
     font-weight: 580;
-    color: " #534638";
+    color:  #534638;
 
     letter-spacing: 2px;
     text-transform: uppercase;
@@ -1095,7 +1095,7 @@ nav {
 .dummy2 {
     width: 100%;
     height: 100vh;
-    background-color: transparent;
+    background-color: blue;
     pointer-events: none;
     z-index: 0;
 }
@@ -3248,7 +3248,9 @@ html:not(.is-ready) [data-reveal] {
         font-family: xanh;
         font-size: clamp(1.2rem, 5.5vw, 2rem);
         font-weight: 580;
-        color: #b9b9b85d;
+        /* color: #b9b9b85d; */
+  color: #342617;
+
         letter-spacing: 2px;
         text-transform:lowercase;
 

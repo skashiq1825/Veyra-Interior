@@ -558,63 +558,162 @@ var projectoverviewtimeline = gsap.timeline({
   scrollTrigger: {
     trigger: ".page-project-overview",
     start: "top top",
-    end: "bottom top",
+    end: "bottom 80%",
     pin: ".projectoverviewdescription-box",
     scrub: 1,
     // markers: true
   }
 });
+if (window.innerWidth > 600) {
+    
+// projectoverviewtimeline.to(".pos1", {
+//   color: "rgb(173, 131, 85)",
+//   scale: 1.5,
+//   stagger: {
+//     each: 0.025,
+//     from: "start"
+//   },
+//   duration: 0.5,
+//   ease: "power2.out"
+// }, 0);
 
-projectoverviewtimeline.to(".pos1", {
-  color: "rgb(173, 131, 85)",
-  scale: 1.5,
-  stagger: {
-    each: 0.025,
-    from: "start"
-  },
+// projectoverviewtimeline.to(".pos1", {
+//   color: "#342617",
+//   scale: 1,
+//   stagger: {
+//     each: 0.025,
+//     from: "start"
+//   },
+//   duration: 0.5,
+//   ease: "power2.inOut"
+// }, 0.5);
+
+
+// projectoverviewtimeline.to(".pos1", {
+//   opacity: 0,
+
+//   stagger: "0.05",
+//   duration: 0.5
+// })
+// projectoverviewtimeline.to(".pos2", {
+//   opacity: 1,
+//   stagger: "0.2",
+//   duration: 1,
+//   color: "#342617",
+
+
+// })
+// projectoverviewtimeline.from(".select-box h4", {
+//   opacity: 0,
+//   stagger: "0.01",
+
+//   y: 30,
+//   duration: 1
+// })
+//  projectoverviewtimeline.from(".select-box h6", {
+//   opacity: 0,
+//   y: 30,
+
+//   duration: 1
+// }, "<0.3")
+ projectoverviewtimeline.from(".pos1first", {
+
+stagger:"0.05",
+y:30,
+opacity:0,
   duration: 0.5,
   ease: "power2.out"
 }, 0);
 
-projectoverviewtimeline.to(".pos1", {
-  color: "#342617",
-  scale: 1,
-  stagger: {
-    each: 0.025,
-    from: "start"
-  },
+   projectoverviewtimeline.to(".pos1first", {
+
+
+y:-30,
+opacity:0,
   duration: 0.5,
-  ease: "power2.inOut"
-}, 0.5);
+  ease: "power2.out"
+}, );
 
+ projectoverviewtimeline.from(".pos1second", {
 
-projectoverviewtimeline.to(".pos1", {
-  opacity: 0,
-
-  stagger: "0.05",
-  duration: 0.5
-})
-projectoverviewtimeline.to(".pos2", {
-  opacity: 1,
-  stagger: "0.2",
-  duration: 1,
+stagger:"0.05",
+y:30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out",
   color: "#342617",
 
+});
 
-})
-projectoverviewtimeline.from(".select-box h4", {
-  opacity: 0,
-  stagger: "0.01",
+   projectoverviewtimeline.to(".pos1second", {
 
-  y: 30,
-  duration: 1
-})
- projectoverviewtimeline.from(".select-box h6", {
-  opacity: 0,
-  y: 30,
 
-  duration: 1
-}, "<0.3")
+y:-30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out"
+});
+
+ projectoverviewtimeline.from(".pos1third", {
+
+stagger:"0.05",
+y:30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out"
+});
+
+} else {
+    projectoverviewtimeline.from(".pos1first", {
+
+stagger:"0.05",
+y:30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out"
+}, 0);
+
+   projectoverviewtimeline.to(".pos1first", {
+
+
+y:-30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out"
+}, );
+
+ projectoverviewtimeline.from(".pos1second", {
+
+stagger:"0.05",
+y:30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out",
+  color: "#342617",
+
+});
+
+   projectoverviewtimeline.to(".pos1second", {
+
+
+y:-30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out"
+});
+
+ projectoverviewtimeline.from(".pos1third", {
+
+stagger:"0.05",
+y:30,
+opacity:0,
+  duration: 0.5,
+  ease: "power2.out"
+});
+}
+
+
+
 
 
 const horizontalpage = document.querySelector(".horizontal-projectpage");
