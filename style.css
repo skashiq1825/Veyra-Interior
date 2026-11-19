@@ -2930,7 +2930,7 @@ html:not(.is-ready) [data-reveal] {
     .information p {
         width: 90%;
         font-family: xanh;
-        font-size: clamp(1.1rem, 4.7vw, 1.8rem);
+        font-size: clamp(1.2rem, 4.8vw, 1.8rem);
         opacity: 0.7;
         /* background-color: rgba(255, 251, 251, 0.068); */
         color: #ffffff;
