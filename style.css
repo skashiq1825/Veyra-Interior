@@ -477,7 +477,7 @@ nav {
 
 .information {
     width: 100%;
-    height: 120vh;
+    height: 100vh;
     position: relative;
     display: flex;
     align-items: center;
@@ -2929,8 +2929,8 @@ html:not(.is-ready) [data-reveal] {
 
     .information p {
         width: 90%;
-        font-family: renade;
-        font-size: clamp(1.2rem, 5vw, 2rem);
+        font-family: xanh;
+        font-size: clamp(1.1rem, 4.7vw, 1.8rem);
         opacity: 0.7;
         /* background-color: rgba(255, 251, 251, 0.068); */
         color: #ffffff;
@@ -2939,6 +2939,7 @@ html:not(.is-ready) [data-reveal] {
         font-weight: 400;
         /* letter-spacing: 1px; */
         z-index: 3;
+        text-transform: lowercase;
     }
 
     .infopageimage {
@@ -2963,8 +2964,8 @@ html:not(.is-ready) [data-reveal] {
     }
 
     .ip2i1 {
-        width: clamp(14rem, 64vw, 18rem);
-        height: clamp(14rem, 62.4vw, 18rem);
+        width: clamp(12rem, 60vw, 16rem);
+        height: clamp(12rem, 58.4vw, 16rem);
         top: 25%;
         right: 10%;
     }
@@ -2978,10 +2979,10 @@ html:not(.is-ready) [data-reveal] {
     }
 
     .ip2i3 {
-        width: clamp(13rem, 60vw, 17rem);
-        height: clamp(13rem, 62.4vw, 17rem);
+        width: clamp(12rem, 60vw, 16rem);
+        height: clamp(12rem, 58.4vw, 16rem);
         top: 74%;
-        right: 30%;
+        left: 10%;
     }
 
     .about-studio {
@@ -3126,7 +3127,7 @@ html:not(.is-ready) [data-reveal] {
 
     .dummy {
         width: 100%;
-        height: calc(1100px + 195vh);
+        height: calc(1100px + 207vh);
         background-color: transparent;
         pointer-events: none;
         z-index: 0;
@@ -3200,7 +3201,17 @@ html:not(.is-ready) [data-reveal] {
 
 
     }
+.page-project-overview {
+    width: 100%;
+    height: 200vh;
+    /* background-color: red; */
+    position: relative;
+    /* perspective: 1000px; 
+    transform-style: preserve-3d; */
+    /* z-index: 2; */
 
+
+}
     .pro1 {
         width: 100%;
         height: 100%;
@@ -3278,23 +3289,27 @@ html:not(.is-ready) [data-reveal] {
     .poimage2 {
         width: clamp(9.375rem, 30vw, 15rem);
         height: clamp(11.25rem, 36vw, 17.5rem);
+        display: none;
+
     }
 
     .poimage3 {
         width: clamp(14.375rem, 46vw, 21.25rem);
         height: clamp(9.375rem, 30vw, 15rem);
+        top: 75%;
     }
 
     .poimage4 {
         width: clamp(10rem, 32vw, 16.25rem);
         height: clamp(13.125rem, 42vw, 20rem);
         top: 44%;
+        display: none;
     }
 
     .poimage5 {
         width: clamp(14.375rem, 46vw, 21.25rem);
         height: clamp(16.25rem, 52vw, 22.5rem);
-        top: 60%;
+        top: 40%;
     }
 
     .last-project-des {

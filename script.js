@@ -323,14 +323,7 @@ async function startLoader() {
 
   const loadingtimeline = gsap.timeline();
 
-  loadingtimeline.to(".popupimg", {
-    scale: 1,
-    opacity: 1,
-    duration: 0.7,
-    transformOrigin: "center center",
-    ease: "power2.out",
-    stagger: 0.2
-  });
+  
 
 
 
@@ -558,7 +551,7 @@ var projectoverviewtimeline = gsap.timeline({
   scrollTrigger: {
     trigger: ".page-project-overview",
     start: "top top",
-    end: "bottom 80%",
+    end: "bottom 65%",
     pin: ".projectoverviewdescription-box",
     scrub: 1,
     // markers: true
@@ -666,10 +659,10 @@ opacity:0,
 } else {
     projectoverviewtimeline.from(".pos1first", {
 
-stagger:"0.05",
+stagger:"0.06",
 y:30,
 opacity:0,
-  duration: 0.5,
+  duration: 0.3,
   ease: "power2.out"
 }, 0);
 
