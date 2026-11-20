@@ -787,7 +787,7 @@ nav {
 .about-end {
     width: 100%;
     height: 100vh;
-    background-color: #84603c;
+    background-color:#9C8166;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -1624,7 +1624,8 @@ nav {
     width: 15vw;
     height: 4vw;
     border-radius: 2.4vw;
-    background-color: #84603c;
+    /* background-color: #84603c; */
+    background-color: #927457;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2925,6 +2926,14 @@ html:not(.is-ready) [data-reveal] {
         justify-content: center;
         /* background-color: red; */
         overflow: hidden;
+          background: linear-gradient(
+        to bottom,
+        #EFE6DD 0%,
+         #EFE6DD 60%,
+        #918f86fb 90%,
+
+        #87857C 100%
+    );
     }
 
     .information p {
@@ -2933,15 +2942,15 @@ html:not(.is-ready) [data-reveal] {
         font-size: clamp(1.2rem, 4.8vw, 1.8rem);
         opacity: 0.7;
         /* background-color: rgba(255, 251, 251, 0.068); */
-        color: #ffffff;
+        color: #acccda;
+       
         mix-blend-mode: difference;
-         /* text-align: justify;
-    text-align-last: justify; */
+
         font-weight: 400;
-        /* letter-spacing: 1px; */
+     
         z-index: 3;
         line-height: 1.4;
-        /* text-transform: lowercase; */
+      
     }
 
     .infopageimage {
@@ -3086,7 +3095,7 @@ html:not(.is-ready) [data-reveal] {
         /* width: fit-content; */
         height: 25vh;
         font-family: mld;
-        font-size: clamp(10rem, 31vw, 12rem);
+        font-size: clamp(11rem, 31vw, 12rem);
 
         color: #D0C99D;
         font-weight: 20;
@@ -3395,14 +3404,14 @@ html:not(.is-ready) [data-reveal] {
         width: 35vw;
         height: 9vw;
         border-radius: 2.4vw;
-        background-color: #84603c;
+        /* background-color: #84603c; */
         display: flex;
         align-items: center;
         justify-content: center;
         font-family: xanh;
         font-size: clamp(0.7rem, 1.8vw, 0.9rem);
         text-align: center;
-        color: #EFE6DD;
+        color: #ffffff;
         cursor: pointer;
         padding: 1vw;
         margin-top: 1vw;
