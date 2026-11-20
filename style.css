@@ -2928,18 +2928,20 @@ html:not(.is-ready) [data-reveal] {
     }
 
     .information p {
-        width: 90%;
+        width: 78%;
         font-family: xanh;
         font-size: clamp(1.2rem, 4.8vw, 1.8rem);
         opacity: 0.7;
         /* background-color: rgba(255, 251, 251, 0.068); */
         color: #ffffff;
         mix-blend-mode: difference;
-        text-align: center;
+         /* text-align: justify;
+    text-align-last: justify; */
         font-weight: 400;
         /* letter-spacing: 1px; */
         z-index: 3;
-        text-transform: lowercase;
+        line-height: 1.4;
+        /* text-transform: lowercase; */
     }
 
     .infopageimage {
@@ -3026,8 +3028,9 @@ html:not(.is-ready) [data-reveal] {
         color: #EFE6DD;
         font-weight: 500;
         /* text-align: center; */
-        width: 95%;
+        width: 86%;
         z-index: 2;
+     
         /* background-color: rebeccapurple; */
    
 
@@ -3083,7 +3086,7 @@ html:not(.is-ready) [data-reveal] {
         /* width: fit-content; */
         height: 25vh;
         font-family: mld;
-        font-size: clamp(9.2rem, 29vw, 11rem);
+        font-size: clamp(10rem, 31vw, 12rem);
 
         color: #D0C99D;
         font-weight: 20;
