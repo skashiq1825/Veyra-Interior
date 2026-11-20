@@ -81,7 +81,7 @@ body {
     background-position: center;
     background-size: cover;
 
-    background-color: rgb(81, 80, 80);
+    /* background-color: rgb(81, 80, 80); */
     color: white;
 
 }
@@ -316,18 +316,19 @@ body {
 nav {
     width: 100%;
     height: 10vh;
-    /* background-color: red; */
-    padding: 0vw 1.5vw;
+    /* background-color: rgba(255, 0, 0, 0.473); */
+    padding: 0vw 1vw;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     position: fixed;
     top: 0%;
     z-index: 4;
 }
 .logo-veyra{
-    width: 10vw;
-    height: 10vw;
+    display: none;
+    width: 8vw;
+    height: 8vw;
     position: relative;
     /* background-color: red; */
     background-position: center;
@@ -2687,12 +2688,12 @@ html:not(.is-ready) [data-reveal] {
 
 @media (max-width:600px) {
 .hero-sec {
-    width: 80%;
+    width:80%;
     height: 85vh;
     background-position: center;
     background-size: cover;
-
-    background-color: rgb(81, 80, 80);
+margin-top: 2vh;
+    /* background-color: rgb(81, 80, 80); */
     color: white;
 
 }
@@ -2700,7 +2701,7 @@ nav {
     width: 100%;
     height: 10vh;
     /* background-color: red; */
-    padding: 0vw 2vw;
+    padding: 0vw 3vw 0vw 1vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -3436,7 +3437,19 @@ nav {
 }
 .menu i {
     font-size: 5.3vw;
-    color: #1d1b17;
+    color: #171614;
     
+}
+
+.logo-veyra{
+    display: flex;
+    width: 8vw;
+    height: 8vw;
+    position: relative;
+    /* background-color: red; */
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/VI_logo_changed-removebg-preview.png);
+
 }
 }

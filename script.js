@@ -813,7 +813,7 @@ var defaulttimeline = gsap.timeline({
   scrollTrigger:{
     start:"top 80%",
     end:"top 0%",
-    markers:true,
+    // markers:true,
     trigger:".horizontaldefault"
   }
 })
@@ -860,7 +860,7 @@ var lastproj = gsap.timeline({
     start:"top 60%",
     end:"top 0%",
     scrub:1,
-    markers:true,
+    // markers:true,
     trigger:" .last-project-des"
   }
 })
