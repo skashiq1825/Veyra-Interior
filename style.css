@@ -317,14 +317,37 @@ nav {
     width: 100%;
     height: 10vh;
     /* background-color: red; */
-    padding: 0vw 1vw;
+    padding: 0vw 1.5vw;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
     position: fixed;
     top: 0%;
     z-index: 4;
 }
+.logo-veyra{
+    width: 10vw;
+    height: 10vw;
+    position: relative;
+    /* background-color: red; */
+    background-position: center;
+    background-size: cover;
+    background-image: url(./assets/VI_logo_changed-removebg-preview.png);
+
+}
+/* .logo-veyra::before{
+    content:"veyra interior";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    color: black;
+    white-space: nowrap;
+    font-family: xanh;
+    transform: translate(0%,-50%);
+    font-size: 1.7vw;
+
+
+} */
 
 .menu {
     width: 3vw;
@@ -759,6 +782,7 @@ nav {
     background-position: center;
     background-size: cover;
     background-image: url(./assets/boxroom/boxroom\ \(1\)\ reimagined\ \(1\).webp);
+    /* background-image: url(./assets/VI_logo_changed-removebg-preview.png); */
     transform-origin: center center;
 }
 
@@ -787,7 +811,7 @@ nav {
 .about-end {
     width: 100%;
     height: 100vh;
-    background-color:#9C8166;
+    background-color:#8c6b4a;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -2150,181 +2174,9 @@ nav {
         font-size: 10px;
         letter-spacing: 2px;
     }
+
 }
 
-/* =====================================
-   VEYRA THREE.JS HERO
-===================================== */
-
-.hero-sec {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-}
-
-/* Three.js canvas container */
-
-.hero-sec #canvas-container {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.hero-sec #canvas-container canvas {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-/* Topbar */
-
-.hero-sec #topbar {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    right: 20px;
-    z-index: 5;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    pointer-events: none;
-}
-
-.hero-sec .brand {
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #fff;
-    text-shadow: 0 1px 5px #333;
-}
-
-.hero-sec .model-status {
-    font-size: 11px;
-    letter-spacing: 1px;
-    color: #fff;
-    text-align: right;
-    text-shadow: 0 1px 5px #333;
-}
-
-/* Instructions */
-
-.hero-sec #instructions {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: 5;
-
-    padding: 12px 16px;
-
-    background: rgba(201, 127, 127, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 4px;
-
-    font-size: 11px;
-    line-height: 1.8;
-    letter-spacing: 0.5px;
-    color: #fff;
-
-    pointer-events: none;
-}
-
-/* Loader */
-
-.hero-sec #loader {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 14px;
-
-    background: #7a7878;
-    color: #fff;
-
-    transition: opacity 0.4s ease;
-}
-
-.hero-sec #loader.hidden {
-    opacity: 0;
-    pointer-events: none;
-}
-
-.hero-sec .loader-title {
-    font-size: 12px;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-}
-
-.hero-sec .loader-progress {
-    font-size: 11px;
-    letter-spacing: 1px;
-    opacity: 0.75;
-}
-
-.hero-sec .loader-line {
-    width: 150px;
-    height: 2px;
-    background: #fff;
-    overflow: hidden;
-}
-
-.hero-sec .loader-line-inner {
-    width: 0%;
-    height: 100%;
-    background: #fff;
-    transition: width 0.15s linear;
-}
-
-/* Error */
-
-.hero-sec #error-message {
-    display: none;
-    position: absolute;
-    z-index: 30;
-
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-
-    width: min(90%, 450px);
-    padding: 24px;
-
-    background: #242424;
-    color: #fff;
-    border: 1px solid #555;
-
-    font-size: 13px;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
-}
-
-@media(max-width: 600px) {
-    .hero-sec #topbar {
-        top: 14px;
-        left: 14px;
-        right: 14px;
-    }
-
-    .hero-sec #instructions {
-        left: 14px;
-        bottom: 14px;
-        font-size: 10px;
-    }
-
-    .hero-sec .brand {
-        font-size: 10px;
-        letter-spacing: 2px;
-    }
-}
 
 
 
@@ -2834,6 +2686,28 @@ html:not(.is-ready) [data-reveal] {
 }
 
 @media (max-width:600px) {
+.hero-sec {
+    width: 80%;
+    height: 85vh;
+    background-position: center;
+    background-size: cover;
+
+    background-color: rgb(81, 80, 80);
+    color: white;
+
+}
+nav {
+    width: 100%;
+    height: 10vh;
+    /* background-color: red; */
+    padding: 0vw 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0%;
+    z-index: 4;
+}
 
     .loading-name-box {
         width: 100%;
@@ -2929,10 +2803,14 @@ html:not(.is-ready) [data-reveal] {
           background: linear-gradient(
         to bottom,
         #EFE6DD 0%,
-         #EFE6DD 60%,
-        #918f86fb 90%,
+    #EFE6DD 50%,
+    #EAE1D7 65%,
+    #DDD5CB 75%,
+    #C8C1B7 84%,
+    #96938cf1 93%,
+    #88857ff2 97%,
 
-        #87857C 100%
+    #87857C 100%
     );
     }
 
@@ -2979,6 +2857,7 @@ html:not(.is-ready) [data-reveal] {
         height: clamp(12rem, 58.4vw, 16rem);
         top: 25%;
         right: 10%;
+        
     }
 
     .ip2i2 {
@@ -3306,6 +3185,7 @@ html:not(.is-ready) [data-reveal] {
     .poimage1 {
         width: clamp(12.5rem, 40vw, 18.75rem);
         height: clamp(17.5rem, 56vw, 23.75rem);
+        right: 5%;
     }
 
     .poimage2 {
@@ -3319,6 +3199,7 @@ html:not(.is-ready) [data-reveal] {
         width: clamp(14.375rem, 46vw, 21.25rem);
         height: clamp(9.375rem, 30vw, 15rem);
         top: 75%;
+        right: 5%;
     }
 
     .poimage4 {
@@ -3332,6 +3213,7 @@ html:not(.is-ready) [data-reveal] {
         width: clamp(14.375rem, 46vw, 21.25rem);
         height: clamp(16.25rem, 52vw, 22.5rem);
         top: 40%;
+        left: 5%;
     }
 
     .last-project-des {
@@ -3548,5 +3430,13 @@ html:not(.is-ready) [data-reveal] {
     bottom: 3%;
     color: #855f3a;
 
+}
+.panel{
+    bottom: 10%;
+}
+.menu i {
+    font-size: 5.3vw;
+    color: #1d1b17;
+    
 }
 }
