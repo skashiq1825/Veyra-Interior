@@ -2994,86 +2994,96 @@ html:not(.is-ready) [data-reveal] {
 
     .studio-head {
         width: 100%;
-        height: 100vh;
+        height: 98vh;
         /* background-color: #87857C; */
         /* background-color: red; */
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: flex-start;
-        gap: 4vw;
-        padding: 7vh 0vh;
+        justify-content: space-between;
+        gap: 4vh;
+        padding: 5vh 0vh 0vh 0vh ;
         position: relative;
         overflow: hidden;
     }
 
     .std-hd-txt {
         width: 100%;
-        height: 25vh;
-        /* background-color: yellow; */
+        height: 30vh;
+        /* background-color: rgb(2, 44, 18); */
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        gap: 5vw;
+        justify-content: flex-start;
+        gap: 4vh;
+        padding: 0vh 0vh 0vh 0vh;
     }
 
     .studio-head h2 {
         font-family: xanh;
-        font-size: clamp(1.4rem, 4.8vw, 2.2rem);
+        font-size: clamp(1.3rem, 4.8vw, 2.2rem);
         /* line-height: 3vw; */
         color: #EFE6DD;
         font-weight: 500;
         /* text-align: center; */
         width: 95%;
         z-index: 2;
+        /* background-color: rebeccapurple; */
+   
 
     }
 
     .studio-head h5 {
-        font-family: renade;
-        font-size: clamp(0.9rem, 0.8vw, 1.2rem);
+        font-family: excon;
+        font-size: clamp(1.1rem, 1vw, 1.4rem);
 
         /* line-height: 3vw; */
         color: #EFE6DD;
         font-weight: 300;
         text-align: center;
         width: 70%;
+        /* background-color: green; */
+       
+        
+
         letter-spacing: 1px;
 
     }
 
     .studioheadfooter {
         width: 90%;
-        height: 25vh;
+        height: 30vh;
         /* background-color: yellow; */
         display: flex;
-        align-items: center;
+        align-items: flex-end;
         justify-content: center;
         font-family: xanh;
-        font-size: clamp(1.2rem, 1vw, 1.4rem);
+        font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+        
+        
         color: #EFE6DD;
 
         font-weight: 100;
         text-align: center;
+        padding: 15vh 0vh 3.5vh 0vh;
     }
 
     .cursive-branding-wrapper {
-        height: 30vh;
+        height: 25vh;
         /* background-color: yellow; */
         width: 100%;
         position: relative;
         display: flex;
         align-items: center;
-        justify-content: center;
+        
     }
 
     .cursivebranding {
         /* background-color: teal; */
         /* width: fit-content; */
-        /* height: 20vh; */
+        height: 25vh;
         font-family: mld;
-        font-size: clamp(7.2rem, 25vw, 8rem);
+        font-size: clamp(9.2rem, 29vw, 11rem);
 
         color: #D0C99D;
         font-weight: 20;
@@ -3088,7 +3098,7 @@ html:not(.is-ready) [data-reveal] {
         line-height: 0;
         /* justify-content: center; */
         gap: 0vw;
-        padding: 0vw 2vw;
+        padding: 2vw 2vw;
         animation-name: run;
         animation-duration: 95s;
         animation-iteration-count: infinite;
