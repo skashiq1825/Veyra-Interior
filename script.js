@@ -514,13 +514,26 @@ servicetimeline.to(".pro1 img", {
   filter: "saturate(0.2)",
 
 }, "<");
+servicetimeline.to(".service-txt-box1",{
+  y:-30,
+  opacity:0,
+  duration:0.3
+
+},"<")
+servicetimeline.from(".service-txt-box2",{
+  y:30,
+  opacity:0,
+  duration:0.8
+
+},"<0.3")
 
 servicetimeline.to(".spro2", {
   top: "50%",
   transform: "translate(-50%,-50%)",
   duration: 1
 
-}, "<")
+}, "< -0.3")
+
 servicetimeline.to(".pro2", {
   rotate: "-10deg",
   width: "60%",
@@ -533,12 +546,26 @@ servicetimeline.to(".pro2 img", {
   filter: "saturate(0.2)",
 
 }, "<");
+servicetimeline.to(".service-txt-box2",{
+  y:-30,
+  opacity:0,
+  duration:0.3
+
+},"<")
+
+servicetimeline.from(".service-txt-box3",{
+  y:30,
+  opacity:0,
+  duration:0.5
+
+},"<0.3")
+
 servicetimeline.to(".spro3", {
   top: "50%",
   transform: "translate(-50%,-50%)",
   duration: 1
 
-}, "<")
+}, "< -0.3")
 // servicetimeline.to(".pro3",{
 //   rotate:"-10deg",
 //   scale:"0.5",
@@ -559,56 +586,7 @@ var projectoverviewtimeline = gsap.timeline({
 });
 if (window.innerWidth > 600) {
     
-// projectoverviewtimeline.to(".pos1", {
-//   color: "rgb(173, 131, 85)",
-//   scale: 1.5,
-//   stagger: {
-//     each: 0.025,
-//     from: "start"
-//   },
-//   duration: 0.5,
-//   ease: "power2.out"
-// }, 0);
 
-// projectoverviewtimeline.to(".pos1", {
-//   color: "#342617",
-//   scale: 1,
-//   stagger: {
-//     each: 0.025,
-//     from: "start"
-//   },
-//   duration: 0.5,
-//   ease: "power2.inOut"
-// }, 0.5);
-
-
-// projectoverviewtimeline.to(".pos1", {
-//   opacity: 0,
-
-//   stagger: "0.05",
-//   duration: 0.5
-// })
-// projectoverviewtimeline.to(".pos2", {
-//   opacity: 1,
-//   stagger: "0.2",
-//   duration: 1,
-//   color: "#342617",
-
-
-// })
-// projectoverviewtimeline.from(".select-box h4", {
-//   opacity: 0,
-//   stagger: "0.01",
-
-//   y: 30,
-//   duration: 1
-// })
-//  projectoverviewtimeline.from(".select-box h6", {
-//   opacity: 0,
-//   y: 30,
-
-//   duration: 1
-// }, "<0.3")
  projectoverviewtimeline.from(".pos1first", {
 
 stagger:"0.05",

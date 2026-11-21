@@ -1165,16 +1165,16 @@ nav {
 .hpp1 {
     width: 100%;
     height: 100%;
-    /* background-color: rgb(155, 136, 59); */
+    
     position: absolute;
     bottom: -25%;
     left: 110%;
-    /* transform: translate(-50%,-50%); */
+    
     scale: 1;
     /* rotate:10deg; */
     z-index: 3;
     filter: saturate(1);
-    /* transform-origin: bottom left; */
+    
 
 
 }
@@ -2688,8 +2688,8 @@ html:not(.is-ready) [data-reveal] {
 
 @media (max-width:600px) {
 .hero-sec {
-    width:90%;
-    height: 75vh;
+    width:100%;
+    height: 85vh;
     background-position: center;
     background-size: cover;
 margin-top: 0vh;
@@ -3047,12 +3047,69 @@ nav {
         padding: 2vw 1vw;
     }
 
-    .service-txt-box {
+      .ser-txtbox-wrap {
         width: 100%;
         height: 55%;
         /* background-color: green; */
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+        position: relative;
+        color: #23221a;
+        
     }
 
+    .service-txt-box1 {
+        position: absolute;
+        top: 0%;
+        width: 100%;
+        height: 100%;
+        /* background-color: rgb(0, 53, 128); */
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+        padding: 5vh;
+        opacity: 1;
+        z-index: 3;
+    }
+
+        .service-txt-box2 {
+        position: absolute;
+        top: 0%;
+        width: 100%;
+        height: 100%;
+        /* background-color: rgb(0, 53, 128); */
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+        padding: 5vh;
+        opacity: 1;
+        z-index:2;
+    }
+            .service-txt-box3 {
+        position: absolute;
+        top: 0%;
+        width: 100%;
+        height: 100%;
+        /* background-color: rgb(0, 53, 128); */
+        display: flex;
+        flex-direction: column;
+        gap: 1vw;
+        padding: 5vh;
+        opacity: 1;
+        z-index:1;
+    }
+
+.ser-title{
+    width: 100%;
+    height: 7vh;
+    /* background-color: yellow; */
+}
+.ser-para{
+    width: 100%;
+    height: calc(100% - 7vh);
+    /* background-color: rgb(255, 162, 0); */
+}
     .service-prototype {
         width: 85%;
         height: 45%;
@@ -3452,4 +3509,50 @@ nav {
     background-image: url(./assets/VI_logo_changed-removebg-preview.png);
 
 }
+/* .hero-sec {
+    border-radius: 45px;
+
+    -webkit-mask-image: 
+        linear-gradient(to right, transparent 0%, black 20%, black 85%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 20%, black 85%, transparent 100%);
+
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+} */
+ .hero-sec {
+    border-radius: 45px;
+
+    -webkit-mask-image:
+        linear-gradient(
+            to right,
+            transparent 0%,
+            rgba(0,0,0,0.08) 4%,
+            rgba(0,0,0,0.35) 9%,
+            rgba(0,0,0,0.75) 15%,
+            black 22%,
+            black 78%,
+            rgba(0,0,0,0.75) 85%,
+            rgba(0,0,0,0.35) 91%,
+            rgba(0,0,0,0.08) 96%,
+            transparent 100%
+        ),
+        linear-gradient(
+            to bottom,
+            transparent 0%,
+            rgba(0,0,0,0.08) 4%,
+            rgba(0,0,0,0.35) 9%,
+            rgba(0,0,0,0.75) 15%,
+            black 22%,
+            black 78%,
+            rgba(0,0,0,0.75) 85%,
+            rgba(0,0,0,0.35) 91%,
+            rgba(0,0,0,0.08) 96%,
+            transparent 100%
+        );
+
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}
+
+
 }
