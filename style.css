@@ -2688,18 +2688,18 @@ html:not(.is-ready) [data-reveal] {
 
 @media (max-width:600px) {
 .hero-sec {
-    width:80%;
-    height: 85vh;
+    width:90%;
+    height: 75vh;
     background-position: center;
     background-size: cover;
-margin-top: 2vh;
+margin-top: 0vh;
     /* background-color: rgb(81, 80, 80); */
     color: white;
 
 }
 nav {
     width: 100%;
-    height: 10vh;
+    height: 7vh;
     /* background-color: red; */
     padding: 0vw 3vw 0vw 1vw;
     display: flex;
@@ -3433,7 +3433,7 @@ nav {
 
 }
 .panel{
-    bottom: 10%;
+    bottom: 18%;
 }
 .menu i {
     font-size: 5.3vw;

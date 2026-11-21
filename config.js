@@ -40,19 +40,19 @@
      */
     views: {
       wide: {
-        label: 'Wide view', caption: 'The complete living room',
+        label: 'Wide view', caption: '',
         position: [2.95, 1.43, -2.85], target: [3.17, 1.30, 5.15], fov: 40,
         cutaway: true,
         orbit: { azimuth: 0.30, polar: 0.07 }
       },
       sofa: {
-        label: 'Sofa view', caption: 'Sculpted seating, wrapped in linen tones',
+        label: 'Sofa view', caption: '',
         position: [2.30, 1.08, 1.50], target: [4.55, 0.50, 3.85], fov: 44,
         bounds: true,
         orbit: { azimuth: 0.45, polar: 0.20 }
       },
       close: {
-        label: 'Close view', caption: 'Marble, glass and warm light — up close',
+        label: 'Close view', caption: '',
         position: [2.85, 0.92, 2.40], target: [3.78, 0.40, 3.55], fov: 36,
         bounds: true,
         orbit: { azimuth: 0.40, polar: 0.18 }
