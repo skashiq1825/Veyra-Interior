@@ -73,6 +73,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
 }
 
 .hero-sec {
@@ -2689,7 +2690,7 @@ html:not(.is-ready) [data-reveal] {
 @media (max-width:600px) {
 .hero-sec {
     width:85%;
-    height: 75vh;
+    height: 85vh;
     background-position: center;
     background-size: cover;
 margin-top: 0vh;
@@ -3509,17 +3510,8 @@ nav {
     background-image: url(./assets/VI_logo_changed-removebg-preview.png);
 
 }
-/* .hero-sec {
-    border-radius: 45px;
 
-    -webkit-mask-image: 
-        linear-gradient(to right, transparent 0%, black 20%, black 85%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, black 20%, black 85%, transparent 100%);
-
-    -webkit-mask-composite: source-in;
-    mask-composite: intersect;
-} */
- /* .hero-sec {
+  .hero-sec {
     border-radius: 45px;
 
     -webkit-mask-image:
@@ -3552,43 +3544,56 @@ nav {
 
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
-} */
-/* .hero-sec {
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 0%,
-        black 85%,
-        transparent 100%
-    );
-
-    mask-image: linear-gradient(
-        to bottom,
-        black 0%,
-        black 85%,
-        transparent 100%
-    );
-} */
-
+} 
 .hero-sec {
-    -webkit-mask-image: linear-gradient(
-        to bottom,
-        black 0%,
-        black 65%,
-        rgba(0,0,0,0.9) 75%,
-        rgba(0,0,0,0.65) 84%,
-        rgba(0,0,0,0.3) 93%,
-        transparent 100%
-    );
+    position: relative;
+}
 
-    mask-image: linear-gradient(
-        to bottom,
-        black 0%,
-        black 65%,
-        rgba(0,0,0,0.9) 75%,
-        rgba(0,0,0,0.65) 84%,
-        rgba(0,0,0,0.3) 93%,
-        transparent 100%
-    );
+.hero-typography {
+    position: absolute;
+    top: 15%;
+    left: 7.5%;
+    z-index: 10;
+    pointer-events: none;
+    color: rgb(97, 70, 39);
+}
+.hero-typography h1{
+    font-family: xanh;
+    font-size: clamp(2.5rem,7.3vw,3rem);
+    color: rgb(55, 42, 27);
+   font-weight: 200;
+
+
+  
+}
+
+.hero-typography h1 span{
+    font-family: xanh;
+    font-style: italic;
+    font-size: clamp(2.7rem,7.5vw,3.2rem);
+    color: rgb(97, 70, 39);
+   font-weight: 200;
+
+  
+}
+.hero-description{
+    font-family: excon;
+    font-size: clamp(0.9rem,1.5vw,1rem);
+    color: #3d3d3d;
+    font-weight: 200;
+}
+
+.hero-side-label {
+    position: absolute;
+    top: 18%;
+    right: 7%;
+    z-index: 10;
+    pointer-events: none;
+}
+.hero-eyebrow p{
+    font-family: excon;
+    font-size: clamp(0.9rem,1.5vw,1rem);
+    color: #3d3d3d;
 }
 
 }
