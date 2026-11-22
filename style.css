@@ -2689,7 +2689,7 @@ html:not(.is-ready) [data-reveal] {
 @media (max-width:600px) {
 .hero-sec {
     width:85%;
-    height: 85vh;
+    height: 75vh;
     background-position: center;
     background-size: cover;
 margin-top: 0vh;
@@ -3490,7 +3490,7 @@ nav {
 
 }
 .panel{
-    bottom: 15%;
+    bottom: 18%;
 }
 .menu i {
     font-size: 5.3vw;
