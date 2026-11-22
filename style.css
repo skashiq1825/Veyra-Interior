@@ -2688,7 +2688,7 @@ html:not(.is-ready) [data-reveal] {
 
 @media (max-width:600px) {
 .hero-sec {
-    width:100%;
+    width:85%;
     height: 85vh;
     background-position: center;
     background-size: cover;
@@ -3490,7 +3490,7 @@ nav {
 
 }
 .panel{
-    bottom: 18%;
+    bottom: 15%;
 }
 .menu i {
     font-size: 5.3vw;
@@ -3519,7 +3519,7 @@ nav {
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
 } */
- .hero-sec {
+ /* .hero-sec {
     border-radius: 45px;
 
     -webkit-mask-image:
@@ -3552,7 +3552,43 @@ nav {
 
     -webkit-mask-composite: source-in;
     mask-composite: intersect;
-}
+} */
+/* .hero-sec {
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 85%,
+        transparent 100%
+    );
 
+    mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 85%,
+        transparent 100%
+    );
+} */
+
+.hero-sec {
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 65%,
+        rgba(0,0,0,0.9) 75%,
+        rgba(0,0,0,0.65) 84%,
+        rgba(0,0,0,0.3) 93%,
+        transparent 100%
+    );
+
+    mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        black 65%,
+        rgba(0,0,0,0.9) 75%,
+        rgba(0,0,0,0.65) 84%,
+        rgba(0,0,0,0.3) 93%,
+        transparent 100%
+    );
+}
 
 }
