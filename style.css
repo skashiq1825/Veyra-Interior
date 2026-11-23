@@ -3121,9 +3121,9 @@ nav {
     /* background-color: rgb(255, 162, 0); */
 }
     .service-prototype {
-        width: 85%;
+        width: 80%;
         height: 45%;
-        /* background-color: green; */
+       
         position: relative;
         overflow: hidden;
     }
