@@ -69,7 +69,8 @@ body {
     width: 100%;
     height: 100vh;
     z-index: 2;
-    background-color: #EFE6DD;
+    /* background-color: #EFE6DD; */
+    /* background-color: red; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2795,12 +2796,12 @@ nav {
 
     .information {
         width: 100%;
-        height: 110vh;
+        height: 95vh;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        /* background-color: red; */
+        
         overflow: hidden;
           background: linear-gradient(
         to bottom,
@@ -2814,6 +2815,7 @@ nav {
 
     #87857C 100%
     );
+  
     }
 
     .information p {
@@ -2857,15 +2859,16 @@ nav {
     .ip2i1 {
         width: clamp(12rem, 60vw, 16rem);
         height: clamp(12rem, 58.4vw, 16rem);
-        top: 25%;
+        top: 15%;
         right: 10%;
+        
         
     }
 
     .ip2i2 {
         width: clamp(12.25rem, 56vw, 15.75rem);
         height: clamp(12.25rem, 54.6vw, 15.75rem);
-        top: 52%;
+        top: 62%;
         left: 12%;
         display: none;
     }
