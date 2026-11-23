@@ -336,12 +336,13 @@ async function startLoader() {
     ease: "linear"
   });
   loadingtimeline.from(".hero-sec", {
-    width:"60%",
-    height:"60vh",
-    duration: 1,
+    // width:"60%",
+    // height:"60vh",
+    duration: 0.7,
+    opacity:0,
     // delay: 0.5,
     ease: "power2.in"
-  },"<0.6");
+  },"<0.2");
 }
 
 

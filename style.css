@@ -3054,21 +3054,22 @@ nav {
         /* background-color: green; */
         display: flex;
         flex-direction: column;
-        gap: 1vw;
+        /* gap: 4vw; */
         position: relative;
         color: #23221a;
+        padding-top: 2vh;
         
     }
 
     .service-txt-box1 {
         position: absolute;
-        top: 0%;
+        top:calc(0% + 9vh);
         width: 100%;
-        height: 100%;
+        height: calc(100% - 9vh);
         /* background-color: rgb(0, 53, 128); */
         display: flex;
         flex-direction: column;
-        gap: 1vw;
+        gap: 3vw;
         padding: 5vh;
         opacity: 1;
         z-index: 3;
@@ -3076,9 +3077,9 @@ nav {
 
         .service-txt-box2 {
         position: absolute;
-        top: 0%;
+       top:calc(0% + 9vh);
         width: 100%;
-        height: 100%;
+        height: calc(100% - 9vh);
         /* background-color: rgb(0, 53, 128); */
         display: flex;
         flex-direction: column;
@@ -3089,13 +3090,13 @@ nav {
     }
             .service-txt-box3 {
         position: absolute;
-        top: 0%;
+       top: calc(0% + 9vh);
         width: 100%;
-        height: 100%;
+        height: calc(100% - 9vh);
         /* background-color: rgb(0, 53, 128); */
         display: flex;
         flex-direction: column;
-        gap: 1vw;
+        /* gap: 4vw; */
         padding: 5vh;
         opacity: 1;
         z-index:1;
@@ -3105,10 +3106,15 @@ nav {
     width: 100%;
     height: 7vh;
     /* background-color: yellow; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 5vh;
 }
 .ser-para{
     width: 100%;
     height: calc(100% - 7vh);
+    gap: 1vh;
     /* background-color: rgb(255, 162, 0); */
 }
     .service-prototype {
