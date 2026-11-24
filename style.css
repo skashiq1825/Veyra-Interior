@@ -40,7 +40,7 @@ body {
     position: relative;
     background-color: #EFE6DD;
 
-    height: 2000vh;
+    height: 2200vh;
     overflow: hidden;
 
 }
@@ -940,10 +940,11 @@ nav {
 
 .dummy {
     width: 100%;
-    height: calc(1100px + 95vh);
+    height: calc(1900px + 95vh);
     background-color: transparent;
-    pointer-events: none;
     z-index: 0;
+    pointer-events: none;
+   
 }
 
 .page-project-overview {
@@ -3072,10 +3073,11 @@ nav {
 
     .dummy {
         width: 100%;
-        height: calc(1100px + 207vh);
+        height: calc(1900px + 207vh);
         background-color: transparent;
         pointer-events: none;
         z-index: 0;
+      
     }
 
     .services {
@@ -3152,12 +3154,37 @@ nav {
     align-items: center;
     justify-content: flex-start;
     padding: 5vh;
+    font-family: excon;
+}
+.ser-title h1{
+    font-size: clamp(2.5rem,5vw,3.2rem);
+    font-weight: 200;
+    color: #7e6042;
 }
 .ser-para{
     width: 100%;
     height: calc(100% - 7vh);
-    gap: 1vh;
+    gap: 2vh;
     /* background-color: rgb(255, 162, 0); */
+}
+.ser-para h2{
+    font-family: xanh;
+    font-size: clamp(1.7rem,3vw,2.2rem);
+    color: #412e1b;
+    
+}
+.ser-para h5{
+    font-family: excon;
+    font-size: clamp(1rem,1.5vw,1.4rem);
+    color: #5a4128;
+    font-weight: 200;
+    
+}
+.ser-para h3{
+    font-family:xanh ;
+    font-size: clamp(1.2rem,2vw,1.7rem);
+    color: #412e1b;
+    
 }
     .service-prototype {
         width: 85%;

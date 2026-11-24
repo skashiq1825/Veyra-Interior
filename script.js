@@ -490,7 +490,7 @@ gsap.to(".services", {
     pin: true,
     scrub: true,
     start: "top top",
-    end: "+=1100"
+    end: "+=1900"
   }
 })
 
@@ -498,7 +498,7 @@ var servicetimeline = gsap.timeline({
   scrollTrigger: {
     trigger: ".services",
     start: "top top",
-    end: "+=1000",
+    end: "+=1800",
     // markers:true,
     scrub: true
 
