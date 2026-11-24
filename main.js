@@ -49,6 +49,13 @@
         root.updateMatrixWorld(true);
 
         const info = V.prepareModel(root, { renderer, config: C });
+        const outlines = V.createOutlines(root, {
+  threshold: 28,
+  architecturalOpacity: 0.68,
+  furnitureOpacity: 0.38,
+  color: 0x171713,
+  enabled: true
+});
         const curtains = V.createCurtains(info.curtainMeshes, { config: { ...C, curtain: { ...C.curtain, rows: stage.quality.curtainRows } }, reduced });
         lighting = V.createLighting({ scene, renderer, root, info, config: C, quality: stage.quality });
         rig = V.createCameraRig({ camera, controls, stage, config: C, reduced, onViewChange: (n) => ui.setView(n) });
@@ -62,7 +69,18 @@
         renderer.render(scene, camera);
         stage.start();
 
-        V.debug.ctx = { root, scene, camera, controls, renderer, lighting, curtains, info, config: C };
+       V.debug.ctx = {
+  root,
+  scene,
+  camera,
+  controls,
+  renderer,
+  lighting,
+  curtains,
+  outlines,
+  info,
+  config: C
+};
         console.info('[VEYRA] model ready —', info.stats.meshes, 'meshes,', Math.round(info.stats.tris), 'triangles');
 
         await ui.reveal();

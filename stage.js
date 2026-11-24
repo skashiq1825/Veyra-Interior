@@ -8,9 +8,14 @@
     const mobile = U.isMobile();
     const Q = mobile ? C.quality.mobile : C.quality.desktop;
 
+    // const renderer = new THREE.WebGLRenderer({
+    //   canvas, antialias: !mobile, powerPreference: 'high-performance'
+    // });
     const renderer = new THREE.WebGLRenderer({
-      canvas, antialias: !mobile, powerPreference: 'high-performance'
-    });
+  canvas,
+  antialias: true,
+  powerPreference: 'high-performance'
+});
     renderer.outputEncoding = THREE.sRGBEncoding;
     renderer.physicallyCorrectLights = true;
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -38,7 +43,7 @@
     canvas.style.touchAction = 'pan-y';             // horizontal drag = look around, vertical swipe = scroll page
 
     // ---- sizing ----------------------------------------------------------------------------
-    let pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.25 : 1.5);
+    let pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.75 : 1.5);
     const maxPixelRatio = pixelRatio;
     const listeners = [];
     function resize() {
