@@ -509,7 +509,8 @@ servicetimeline.to(".pro1", {
   rotate: "-10deg",
   width: "60%",
   height: "60%",
-  duration: 1
+  duration: 1,
+  delay:1
 });
 servicetimeline.to(".pro1 img", {
   filter: "saturate(0.2)",
@@ -540,7 +541,8 @@ servicetimeline.to(".pro2", {
   width: "60%",
   height: "60%",
 
-  duration: 1
+  duration: 1,
+  delay:1
 
 })
 servicetimeline.to(".pro2 img", {
@@ -564,7 +566,8 @@ servicetimeline.from(".service-txt-box3",{
 servicetimeline.to(".spro3", {
   top: "50%",
   transform: "translate(-50%,-50%)",
-  duration: 1
+  duration: 1,
+  
 
 }, "< -0.3")
 // servicetimeline.to(".pro3",{
