@@ -3094,7 +3094,7 @@ nav {
 
       .ser-txtbox-wrap {
         width: 100%;
-        height: 55%;
+        height: 60%;
         /* background-color: green; */
         display: flex;
         flex-direction: column;
@@ -3154,42 +3154,52 @@ nav {
     align-items: center;
     justify-content: flex-start;
     padding: 5vh;
-    font-family: excon;
+    font-family: xanh;
 }
 .ser-title h1{
     font-size: clamp(2.5rem,5vw,3.2rem);
     font-weight: 200;
-    color: #7e6042;
+    color: #5a4128;
+
 }
 .ser-para{
     width: 100%;
     height: calc(100% - 7vh);
-    gap: 2vh;
+    display: flex;
+    flex-direction: column;
+gap: 0.2vh;
     /* background-color: rgb(255, 162, 0); */
 }
 .ser-para h2{
-    font-family: xanh;
-    font-size: clamp(1.7rem,3vw,2.2rem);
-    color: #412e1b;
+    font-family: excon;
+    font-size: clamp(1.4rem,3vw,2rem);
+    color: #5d4125;
+    font-weight: 100;
+    line-height: 1;
+    margin-bottom: 1vh;
+    
     
 }
 .ser-para h5{
-    font-family: excon;
-    font-size: clamp(1rem,1.5vw,1.4rem);
+    font-family:sans-serif;
+    font-size: clamp(0.9rem,1.5vw,1.2rem);
     color: #5a4128;
-    font-weight: 200;
+    font-weight: 100;
+    line-height: 1.2;
     
 }
 .ser-para h3{
     font-family:xanh ;
-    font-size: clamp(1.2rem,2vw,1.7rem);
+    font-size: clamp(1.4rem,2vw,1.9rem);
     color: #412e1b;
+    line-height: 2;
+    font-weight: 500;
     
 }
     .service-prototype {
         width: 85%;
-        height: 45%;
-       
+        height: 40%;
+       /* background-color: RED; */
         position: relative;
         overflow: hidden;
     }
