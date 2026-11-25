@@ -43,7 +43,7 @@
     canvas.style.touchAction = 'pan-y';             // horizontal drag = look around, vertical swipe = scroll page
 
     // ---- sizing ----------------------------------------------------------------------------
-    let pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.75 : 1.5);
+    let pixelRatio = Math.min(window.devicePixelRatio || 1, mobile ? 1.3 : 1.5);
     const maxPixelRatio = pixelRatio;
     const listeners = [];
     function resize() {
