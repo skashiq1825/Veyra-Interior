@@ -1164,53 +1164,6 @@ nav {
 
 }
 
-.experience-page {
-    width: 100%;
-    height: 100vh;
-    background-color: rgb(131, 131, 164);
-    pointer-events: none;
-    
-    display: flex;
-    flex-direction: column;
-    gap: 1vh;
-}
-.experience-title-box{
-    width: 100%;
-    height: 20%;
-    background-color: red;
-    padding: 2vh;
-}
-.experience-content-area{
-    width: 100%;
-    height: 80%;
-    background-color: rgb(242, 120, 75);
-    display: flex;
-    flex-direction: column;
-    gap: 0.5vh;
-    align-items: center;
-    justify-content: center;
-
-}
-.exp-content-box{
-    width: 100%;
-    height: 32%;
-    background-color: thistle;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    padding: 2vh;
-}
-.exp-content-img{
-    width: 45%;
-    height: 100%;
-    background-color: fuchsia;
-}
-.exp-para{
-    width: 55%;
-    height: 100%;
-    background-color: yellow;
-}
 .horizontal-projectpage {
     width: 100%;
     height: 100vh;
@@ -3380,7 +3333,7 @@ gap: 0.2vh;
         width: clamp(12.5rem, 40vw, 18.75rem);
         height: clamp(17.5rem, 56vw, 23.75rem);
         right: 5%;
-        top: 5%;
+        top: 2%;
     }
 
     .poimage2 {
@@ -3823,6 +3776,7 @@ gap: 0.2vh;
     line-height: 1;
     bottom: 90%;
     font-weight: 100;
+    color: #EFE6DD;
 }
 .process-steps-rowone{
     width: 100%;
@@ -3901,6 +3855,7 @@ gap: 0.2vh;
     align-items: flex-start;
     justify-content: flex-end;
     font-weight: 100;
+    color: #EFE6DD;
     
     /* background-color: #342617; */
 
@@ -3943,5 +3898,105 @@ gap: 0.2vh;
 
 
 
+.experience-page {
+    width: 100%;
+    height: 100vh;
+    /* background-color: rgb(131, 131, 164); */
+    pointer-events: none;
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+.experience-title-box{
+    width: 100%;
+    height: 20%;
+    /* background-color: red; */
+    padding: 2vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    flex-direction: column;
+    color: rgb(97, 70, 39);
 
+
+
+}
+.experience-title-box h1{
+    font-family: xanh;
+    font-size:clamp(2.7rem,2vw,3rem) ;
+    font-weight: 200;
+   
+}
+.experience-title-box h5{
+    font-family: excon;
+    font-weight: 100;
+    font-size: clamp(0.8rem,1.4vw,1.1rem);
+}
+.experience-content-area{
+    width: 100%;
+    height: 80%;
+    /* background-color: rgb(242, 120, 75); */
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    align-items: center;
+    justify-content: center;
+
+}
+.exp-content-box{
+    width: 100%;
+    height: 32%;
+    /* background-color: thistle; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2vh;
+    gap: 2vh;
+
+}
+.exp-content-img{
+    width: 45%;
+    height: 100%;
+    /* background-color: fuchsia; */
+    background-position: center;
+    background-size: cover;
+}
+.exp-para{
+    width: 55%;
+    height: 100%;
+    /* background-color: yellow; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: xanh;
+    font-size: clamp(1.2rem,1.4vw,1.6rem);
+    padding: 2vh;
+        border-left: 1px solid #2a2520;
+
+
+}
+.expara2{
+        border-right: 1px solid #2a2520;
+        border-left: none;
+        
+
+
+}
+.exp-para h5 {
+    font-weight: 400;
+    color: #5A583F;
+
+}
+.exp-img1{
+    background-image: url(./assets/res1kids/kids\ room\ front.webp);
+}
+.exp-img2{
+    background-image: url(./assets/boho/bohorestaurant\(10\).webp);
+   
+}
+.exp-img3{
+    background-image: url(./assets/res1livin/living10.webp);
+}
 }
