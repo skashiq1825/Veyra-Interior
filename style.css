@@ -3093,6 +3093,11 @@ nav {
         justify-content: center;
         gap: 5vw;
         padding: 2vw 1vw;
+        background: linear-gradient(
+  to bottom,
+  #EFE6DD 45%,
+  #8c6b4a 100%
+);
     }
 
       .ser-txtbox-wrap {
@@ -3697,6 +3702,8 @@ gap: 0.2vh;
     align-items: center;
     justify-content: flex-start;
     gap: 2vh;
+    
+
 
 
 
@@ -3713,13 +3720,7 @@ gap: 0.2vh;
     padding: 4vh 2vh 2vh 2vh;
 
 }
-/* .process-intro-box h1{
-    font-family: excon;
-    font-size: clamp(2rem,4vw,2.5rem);
-    font-weight: 100;
-    color:  #e1d8d0 ;
-    
-} */
+
 .process-intro-box h5{
     font-family: sans-serif;
     font-size: clamp(0.65rem,1.5vw,1rem);
@@ -3730,22 +3731,19 @@ gap: 0.2vh;
     height: 10vh;
     text-align: left;
     color: #ebebd6;
-    /* color: #4d3822; */
-
-    /* background-color: black; */
 }
 
 .process-steps{
     width: 100%;
     height: 60%;
-    /* background-color: yellow; */
+    
        background: linear-gradient(
         to bottom,
         #8c6b4a 0%,
         #8c6b4a 25%,
-        #9d8066 55%,
+        #b49478 55%,
         #cfb9a6 75%,
-        #e8d9ca 90%,
+        #e9dbcd 90%,
         #EFE6DD 100%
     );
     position: relative;
@@ -3753,7 +3751,7 @@ gap: 0.2vh;
     align-items: center;
     justify-content: flex-start;
     flex-direction: column;
-    /* gap: 1vh; */
+   
 }
 .process-info-img{
     position: relative;
